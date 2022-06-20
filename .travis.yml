@@ -1,0 +1,97 @@
+group: bluezone
+dist: trusty
+language: java
+jdk:
+  - openjdk8
+services:
+  - docker
+branches:
+  only:
+  - master
+  - develop
+  - /^release-.*$/
+  - /^\d+(\.\d+){1,2}(\.\w+)?(-\S*)?$/
+# HAS_TEST_CLUSTER not set - run test
+# HAS_TEST_CLUSTER set as true - run rest
+# else skip test
+script:
+  - echo "travis_fold:start:UnitTests"
+  - ./gradlew check
+  - echo "travis_fold:end:UnitTests"
+  - echo "travis_fold:start:TestDataSetUp"
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || ./scripts/tests/setup.sh
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || ./gradlew testDataSetup --tests com.ibm.iis.test.TestSetupAndCleanup.test_dataSetup
+  - echo "travis_fold:end:TestDataSetUp"
+  - echo "travis_fold:start:FunctionalTests"
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || ./gradlew functionalTest
+  - echo "travis_fold:end:FunctionalTests"
+  - echo "travis_fold:start:SetupLiberty"
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || ./gradlew setupLiberty
+  - echo "travis_fold:end:SetupLiberty"
+  - echo "travis_fold:start:Deploy_App_to_Liberty"
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || ./gradlew deploy
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || ./gradlew libertyStop
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || sleep 5
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || ./gradlew libertyStart
+  - echo "travis_fold:end:Deploy_App_to_Liberty"
+  - echo "travis_fold:start:IntegrationTest"
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || sleep 60
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || ./gradlew integrationTest
+  - echo "travis_fold:end:IntegrationTest"
+after_script:
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || cat ./build/wlp/usr/servers/gov-insights/configDropins/defaults/*.xml
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || cat ./build/wlp/usr/servers/gov-insights/bootstrap.properties
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || cat ./build/wlp/usr/servers/gov-insights/logs/messages.log
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || ./gradlew libertyStop
+  - test -n "$HAS_TEST_CLUSTER" -a "$HAS_TEST_CLUSTER" != "true" && echo "skipping"
+    || ./gradlew testDataSetup --tests com.ibm.iis.test.TestSetupAndCleanup.test_dataCleanup
+
+install:
+  - wget --no-check-certificate --user $ARTIFACTORY_USERNAME --password $ARTIFACTORY_API_KEY https://na.artifactory.swg-devops.com/artifactory/dataconn-maven-all/com/ibm/wdp/pipeline-artifacts/tools/cv-linux-amd64.tar.gz
+  - mkdir -p /tmp/linter
+  - tar xzvf cv-linux-amd64.tar.gz -C /tmp/linter
+  - chmod +x /tmp/linter/cv
+  - PATH=/tmp/linter/:$PATH
+
+before_deploy:
+  - docker login -u="$ARTIFACTORY_USERNAME" -p="$ARTIFACTORY_API_KEY" dockerrepourl.com
+  - docker login -u="$ARTIFACTORY_USERNAME" -p="$ARTIFACTORY_API_KEY" dockerrepourl.com
+deploy:
+  - provider: script
+    script: TERM=dumb ./gradlew artifactoryPublish
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: -n "$TRAVIS_TAG" || "$TRAVIS_BRANCH" = "develop" || $TRAVIS_BRANCH =~ ^release-.*$
+  - provider: script
+    script: TERM=dumb ./gradlew dockerPushImage
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: -n "$TRAVIS_TAG" || "$TRAVIS_BRANCH" = "develop" || $TRAVIS_BRANCH =~ ^release-.*$
+  - provider: script
+    script: TERM=dumb ./gradlew pushHelmAf
+    skip_cleanup: true
+    on:
+      all_branches: true
+      condition: -n "$TRAVIS_TAG" || "$TRAVIS_BRANCH" = "develop" || $TRAVIS_BRANCH =~ ^release-.*$
+#  This component is not currently deployed to a ref env
+#  - provider: script
+#    script: scripts/kubernetes/update_refenv.sh
+#    skip_cleanup: true
+#    on:
+#      branch: develop

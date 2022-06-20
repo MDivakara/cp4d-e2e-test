@@ -1,0 +1,6 @@
+<Configuration>
+  <Targets>
+      <Exclude>*test*</Exclude>
+      <Exclude>*build*</Exclude>
+  </Targets>
+</Configuration>

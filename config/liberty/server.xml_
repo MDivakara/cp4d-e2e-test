@@ -1,0 +1,42 @@
+<server description="gov-insights-service">
+
+    <!-- Enable features -->
+    <featureManager>
+        <feature>webProfile-7.0</feature>
+        <feature>apiDiscovery-1.0</feature>
+        <feature>localConnector-1.0</feature>
+        <feature>cdi-1.2</feature>
+        <feature>concurrent-1.0</feature>
+    </featureManager>
+
+    <!-- To access this server from a remote client add a host attribute to 
+        the following element, e.g. host="*" -->
+    <httpEndpoint host="*" httpPort="9080" id="defaultHttpEndpoint" />
+    <httpDispatcher enableWelcomePage="false" />
+    <!-- applicationManager autoExpand="true" / -->
+
+    <logging traceSpecification="openjpa.Runtime=debug:org.apache.webbeans=debug" />
+
+    <library apiTypeVisibility="spec,ibm-api,api,third-party" filesetRef="config,insights" id="insights">
+        <folder dir="${server.config.dir}/config" />
+        <folder dir="${server.config.dir}/lib/insights" />
+    </library>
+    <fileset dir="${server.config.dir}/config" id="config" includes="*" />
+    <fileset dir="${server.config.dir}/lib/insights" id="insights" includes="*.jar" />
+
+    <webApplication contextRoot="/" id="gov-insights-rest"
+        location="gov-insights-rest.war" name="gov-insights-rest">
+        <classloader
+            apiTypeVisibility="spec,ibm-api,api,third-party" commonLibraryRef="insights">
+        </classloader>
+    </webApplication>
+
+    <webAppSecurity useAuthenticationDataForUnprotectedResource="false" />
+    
+    <cdi12 enableImplicitBeanArchives="false"/>
+
+    <applicationMonitor updateTrigger="mbean" />
+
+    <apiDiscovery publicURL="/mit/cp4d/api" />
+
+</server>

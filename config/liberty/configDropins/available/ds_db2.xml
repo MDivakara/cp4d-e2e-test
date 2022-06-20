@@ -1,0 +1,40 @@
+<server description="Default Server">
+  <dataSource jndiName="jdbc/insightsServiceDS" id="jdbc/insightsServiceDS"
+              type="javax.sql.XADataSource"
+              isolationLevel="TRANSACTION_READ_COMMITTED"
+              beginTranForResultSetScrollingAPIs="true">
+    <connectionManager maxPoolSize="10" minPoolSize="2" connectionTimeout="60s" agedTimeout="30m"/>
+    <jdbcDriver javax.sql.XADataSource="com.ibm.db2.jcc.DB2XADataSource">
+      <library>
+        <fileset dir="${server.config.dir}/lib/insights" includes="db2jcc4-11.1_4.23.42.jar"/>
+      </library>
+    </jdbcDriver>
+    <properties.db2.jcc
+      driverType="4"
+      serverName="${insights.db.host}"
+      portNumber="${insights.db.port}"
+      user="${insights.db.user}"
+      password="${insights.db.password}"
+      databaseName="${insights.db.name}"
+    />
+  </dataSource>
+  <dataSource jndiName="jdbc/xmetaServiceDS" id="jdbc/xmetaServiceDS"
+              type="javax.sql.XADataSource"
+              isolationLevel="TRANSACTION_READ_COMMITTED"
+              beginTranForResultSetScrollingAPIs="true">
+    <connectionManager maxPoolSize="10" minPoolSize="2" connectionTimeout="60s" agedTimeout="30m"/>
+    <jdbcDriver javax.sql.XADataSource="com.ibm.db2.jcc.DB2XADataSource">
+      <library>
+        <fileset dir="${server.config.dir}/lib/insights" includes="db2jcc4-11.1_4.23.42.jar"/>
+      </library>
+    </jdbcDriver>
+    <properties.db2.jcc
+      driverType="4"
+      serverName="${insights.xmeta.host}"
+      portNumber="${insights.xmeta.port}"
+      user="${insights.xmeta.user}"
+      password="${insights.xmeta.password}"
+      databaseName="${insights.xmeta.name}"
+    />
+  </dataSource>
+</server>

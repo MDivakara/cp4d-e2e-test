@@ -1,0 +1,27 @@
+description = "Insights Stotage Module"
+
+dependencies {
+    
+    compileOnly group: 'org.apache.wink', name: 'wink-json4j', version: project['org.apache.wink.json4j.version']
+    compileOnly group: 'org.apache.zookeeper', name: 'zookeeper', version: project['zookeeper.version']
+    compileOnly group: 'com.cloudant', name: 'cloudant-client', version: project['cloudant.client.version']
+    compileOnly group: 'org.apache.httpcomponents', name: 'httpcore', version: project['httpcore.version']
+    
+}
+
+publishing {
+    publications {
+       mavenJava(MavenPublication) {
+           from components.java
+       }
+    }
+}
+
+eclipse {
+    classpath {
+        defaultOutputDir = file('bin/main')
+        file.whenMerged { cp ->
+            cp.entries.findAll { it instanceof org.gradle.plugins.ide.eclipse.model.SourceFolder && it.path.startsWith('src/test/') }*.output = 'bin/test'
+        }
+    }
+}

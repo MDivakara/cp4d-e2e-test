@@ -1,0 +1,34 @@
+{
+  "model": {
+    "associations": [],
+    "num_columns": 3,
+    "columns": [
+      {
+        "col_index": 0,
+        "min": 40300,
+        "datatype": "numeric",
+        "max": 297625,
+        "mean": 73370.10466232213,
+        "unique": false,
+        "col_name": "SALARY",
+        "standard_deviation": 20858.87937421086
+      },
+      {
+        "col_index": 1,
+        "datatype": "text",
+        "unique": false,
+        "pattern": "",
+        "col_name": "COUNTY"
+      },
+      {
+        "col_index": 2,
+        "datatype": "text",
+        "unique": false,
+        "pattern": "",
+        "col_name": "FTE"
+      }
+    ],
+    "num_rows": 129206,
+    "fileID": "NJ_TEACHERS_SALARIES"
+  }
+}

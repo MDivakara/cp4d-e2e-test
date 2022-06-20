@@ -1,0 +1,606 @@
+{
+	"AssetHasTerm": [
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913h.f2m6rcp.do2eik.boo3uo0u0alae8ucd61qa",
+			"Actions": "NameExists",
+			"Rulerid": "ec1481df.a5023b17.bcmmh913h.mbicuvk.u0v3ih.elcm1atm2kvl6jdqbc596",
+			"Terms": "Name",
+			"TermRID": "6662c0f2.e1b1ec6c.6v4k87aqa.3t9ttci.aqvj05.djmeumse71t9bc2b1oo67"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913h.f2m6rcp.do2eik.boo3uo0u0alae8ucd61qa",
+			"Actions": "NameExists",
+			"Rulerid": "ec1481df.a5023b17.bcmmh98if.alj0dq4.t747dd.631olhpidjeva2q3499cm",
+			"Terms": "Name",
+			"TermRID": "6662c0f2.e1b1ec6c.6v4k87aqa.3t9ttci.aqvj05.djmeumse71t9bc2b1oo67"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9133.2nl2p87.cs2lcv.tbtrv0slk8vb0g42uieam",
+			"Actions": "NameExists",
+			"Rulerid": "ec1481df.a5023b17.bcmmh98hp.30mprvv.je70jn.ff2pf0b2uoqfcgco70a8o",
+			"Terms": "Name",
+			"TermRID": "6662c0f2.e1b1ec6c.6v4k87aqa.3t9ttci.aqvj05.djmeumse71t9bc2b1oo67"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913i.fj73epu.74g08b.7pgtqb0kdksnb2comluln",
+			"Actions": "ValidUsPhoneFormat",
+			"Rulerid": "ec1481df.a5023b17.bcmmh913i.m7s6fpl.3ldg18.is0lvtlh8k9s3kd7b4mtc",
+			"Terms": "Phone Number",
+			"TermRID": "6662c0f2.e1b1ec6c.6vd4coo1d.oineidt.mm53n1.9a7077db6uukrckrhlda1"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912m.u1prfu6.mjbh89.qafouvdo4jrd76cdgn0pd",
+			"Actions": "ValidUsPhoneFormat",
+			"Rulerid": "ec1481df.a5023b17.bcmmh912n.2em1hj9.p2b0fd.8kaf7khi1fbh64n38nk3j",
+			"Terms": "Phone Number",
+			"TermRID": "6662c0f2.e1b1ec6c.6vd4coo1d.oineidt.mm53n1.9a7077db6uukrckrhlda1"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913i.fj73epu.74g08b.7pgtqb0kdksnb2comluln",
+			"Actions": "ValidUsPhoneFormat",
+			"Rulerid": "ec1481df.a5023b17.bcmmh913i.q9ka5qe.o3g7cq.sq67ebai434hvqur2uq30",
+			"Terms": "Phone Number",
+			"TermRID": "6662c0f2.e1b1ec6c.6vd4coo1d.oineidt.mm53n1.9a7077db6uukrckrhlda1"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913f.va33ail.egu8i1.sc257t8kfn9iufgrispav",
+			"Actions": "EmailAddrValidFormat",
+			"Rulerid": "ec1481df.a5023b17.bcmmh913g.80m5ng0.2qr8tp.e9ea7j357c5g53lu7s6pn",
+			"Terms": "EMAIL",
+			"TermRID": "6662c0f2.e1b1ec6c.ktsmaiceo.96fdefn.iqto2e.tg5hffoovm0roujfc7f8k"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9131.ej68ldv.gvi04o.9maidodqi6671i3raat2v",
+			"Actions": "EmailAddrValidFormat",
+			"Rulerid": "ec1481df.a5023b17.bcmmh9131.io433g6.tbrafj.rg4ngjl2mbeql355vqqdo",
+			"Terms": "EMAIL",
+			"TermRID": "6662c0f2.e1b1ec6c.ktsmaiceo.96fdefn.iqto2e.tg5hffoovm0roujfc7f8k"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912l.1av0bnu.29c7tk.ngnma8oskrp8vtse8ps9j",
+			"Actions": "EmailAddrValidFormat",
+			"Rulerid": "ec1481df.a5023b17.bcmmh912l.6gsag7j.b9s209.74i17e9o2mtjttdp57700",
+			"Terms": "EMAIL",
+			"TermRID": "6662c0f2.e1b1ec6c.ktsmaiceo.96fdefn.iqto2e.tg5hffoovm0roujfc7f8k"
+		}
+	],
+	"AseetHasLabel": [
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912m.535v5ss.8nr751.5e1cc60vnobpmuv8gleao",
+			"Actions": "NameExists",
+			"Labels": "PII",
+			"labelRID": "6662c0f2.22257cc4.lvn61mit2.nk3uu8o.l51tkr.fg49g62gjtd98qievt3kr",
+			"rulerid": "ec1481df.a5023b17.bcmmh95ds.6i2rnkc.cjl5kv.brbq2lismj863ov3b3l4f"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9133.2nl2p87.cs2lcv.tbtrv0slk8vb0g42uieam",
+			"Actions": "NameExists",
+			"Labels": "PII",
+			"labelRID": "6662c0f2.22257cc4.lvn61mit2.nk3uu8o.l51tkr.fg49g62gjtd98qievt3kr",
+			"rulerid": "ec1481df.a5023b17.bcmmh98hp.30mprvv.je70jn.ff2pf0b2uoqfcgco70a8o"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913h.f2m6rcp.do2eik.boo3uo0u0alae8ucd61qa",
+			"Actions": "NameExists",
+			"Labels": "PII",
+			"labelRID": "6662c0f2.22257cc4.lvn61mit2.nk3uu8o.l51tkr.fg49g62gjtd98qievt3kr",
+			"rulerid": "ec1481df.a5023b17.bcmmh98if.alj0dq4.t747dd.631olhpidjeva2q3499cm"
+		}
+	],
+	"AeetHasDataClass": [
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913f.va33ail.egu8i1.sc257t8kfn9iufgrispav",
+			"Actions": "EmailAddrValidFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913g.80m5ng0.2qr8tp.e9ea7j357c5g53lu7s6pn",
+			"DATACLASS": "Email Address",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.bechgqg.4t2q52.buo3tetnbk72ll9n71d17",
+			"CLASSCODE": "EA"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913f.va33ail.egu8i1.sc257t8kfn9iufgrispav",
+			"Actions": "EmailAddrValidFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913g.80m5ng0.2qr8tp.e9ea7j357c5g53lu7s6pn",
+			"DATACLASS": "Email Address",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.bechgqg.4t2q52.buo3tetnbk72ll9n71d17",
+			"CLASSCODE": "EA"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9131.ej68ldv.gvi04o.9maidodqi6671i3raat2v",
+			"Actions": "EmailAddrValidFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9131.io433g6.tbrafj.rg4ngjl2mbeql355vqqdo",
+			"DATACLASS": "Email Address",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.bechgqg.4t2q52.buo3tetnbk72ll9n71d17",
+			"CLASSCODE": "EA"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9131.ej68ldv.gvi04o.9maidodqi6671i3raat2v",
+			"Actions": "EmailAddrValidFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9131.io433g6.tbrafj.rg4ngjl2mbeql355vqqdo",
+			"DATACLASS": "Email Address",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.bechgqg.4t2q52.buo3tetnbk72ll9n71d17",
+			"CLASSCODE": "EA"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913i.0i18dah.m5blj9.mqt8287pma2evbcu7l1up",
+			"Actions": "QtyInValidRange",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913i.8gn0cbv.ikq2fg.oegojh0lfe34jqsavadq9",
+			"DATACLASS": "Quantity",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.fokjruo.64necv.rom8o4vnbqr8cov90cle6",
+			"CLASSCODE": "Q"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913i.0i18dah.m5blj9.mqt8287pma2evbcu7l1up",
+			"Actions": "QtyInValidRange",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913i.8gn0cbv.ikq2fg.oegojh0lfe34jqsavadq9",
+			"DATACLASS": "Quantity",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.fokjruo.64necv.rom8o4vnbqr8cov90cle6",
+			"CLASSCODE": "Q"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9133.jjquqg5.l2sdfa.22nbv0col86anfetu1025",
+			"Actions": "QtyInValidRange",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9133.tcg5cgh.8r4oup.9qqet6fsufqavsf6q5ddj",
+			"DATACLASS": "Quantity",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.fokjruo.64necv.rom8o4vnbqr8cov90cle6",
+			"CLASSCODE": "Q"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913i.fj73epu.74g08b.7pgtqb0kdksnb2comluln",
+			"Actions": "ValidUsPhoneFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913i.m7s6fpl.3ldg18.is0lvtlh8k9s3kd7b4mtc",
+			"DATACLASS": "US Phone Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.jo7h0bt.q9t4ip.lr4vn6pr52h3dej8a2ac2",
+			"CLASSCODE": "USPHN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912m.u1prfu6.mjbh89.qafouvdo4jrd76cdgn0pd",
+			"Actions": "ValidUsPhoneFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912n.2em1hj9.p2b0fd.8kaf7khi1fbh64n38nk3j",
+			"DATACLASS": "US Phone Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.jo7h0bt.q9t4ip.lr4vn6pr52h3dej8a2ac2",
+			"CLASSCODE": "USPHN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912m.u1prfu6.mjbh89.qafouvdo4jrd76cdgn0pd",
+			"Actions": "ValidUsPhoneFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912n.9h6q46o.un6tfu.krg0qrq1r85h538aaul6f",
+			"DATACLASS": "US Phone Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.jo7h0bt.q9t4ip.lr4vn6pr52h3dej8a2ac2",
+			"CLASSCODE": "USPHN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9134.6kkkhap.gttfkp.v7vs9888hjso6tkmp7iuk",
+			"Actions": "ValidUsPhoneFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9134.ck21aod.u3ico8.be78d3ql951c2qfguejti",
+			"DATACLASS": "US Phone Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.jo7h0bt.q9t4ip.lr4vn6pr52h3dej8a2ac2",
+			"CLASSCODE": "USPHN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9134.6kkkhap.gttfkp.v7vs9888hjso6tkmp7iuk",
+			"Actions": "ValidUsPhoneFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9134.j3t5vvg.ulnlhb.vh5q0g24q1vrsgjj1ubhm",
+			"DATACLASS": "US Phone Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.jo7h0bt.q9t4ip.lr4vn6pr52h3dej8a2ac2",
+			"CLASSCODE": "USPHN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912m.u1prfu6.mjbh89.qafouvdo4jrd76cdgn0pd",
+			"Actions": "ValidUsPhoneFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912n.2em1hj9.p2b0fd.8kaf7khi1fbh64n38nk3j",
+			"DATACLASS": "US Phone Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.jo7h0bt.q9t4ip.lr4vn6pr52h3dej8a2ac2",
+			"CLASSCODE": "USPHN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9134.6kkkhap.gttfkp.v7vs9888hjso6tkmp7iuk",
+			"Actions": "ValidUsPhoneFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9134.j3t5vvg.ulnlhb.vh5q0g24q1vrsgjj1ubhm",
+			"DATACLASS": "US Phone Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.jo7h0bt.q9t4ip.lr4vn6pr52h3dej8a2ac2",
+			"CLASSCODE": "USPHN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912m.u1prfu6.mjbh89.qafouvdo4jrd76cdgn0pd",
+			"Actions": "ValidUsPhoneFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912n.9h6q46o.un6tfu.krg0qrq1r85h538aaul6f",
+			"DATACLASS": "US Phone Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.jo7h0bt.q9t4ip.lr4vn6pr52h3dej8a2ac2",
+			"CLASSCODE": "USPHN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9134.6kkkhap.gttfkp.v7vs9888hjso6tkmp7iuk",
+			"Actions": "ValidUsPhoneFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9134.ck21aod.u3ico8.be78d3ql951c2qfguejti",
+			"DATACLASS": "US Phone Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.jo7h0bt.q9t4ip.lr4vn6pr52h3dej8a2ac2",
+			"CLASSCODE": "USPHN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913i.fj73epu.74g08b.7pgtqb0kdksnb2comluln",
+			"Actions": "ValidUsPhoneFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913i.m7s6fpl.3ldg18.is0lvtlh8k9s3kd7b4mtc",
+			"DATACLASS": "US Phone Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.jo7h0bt.q9t4ip.lr4vn6pr52h3dej8a2ac2",
+			"CLASSCODE": "USPHN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913i.fj73epu.74g08b.7pgtqb0kdksnb2comluln",
+			"Actions": "ValidUsPhoneFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913i.q9ka5qe.o3g7cq.sq67ebai434hvqur2uq30",
+			"DATACLASS": "US Phone Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.jo7h0bt.q9t4ip.lr4vn6pr52h3dej8a2ac2",
+			"CLASSCODE": "USPHN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913i.fj73epu.74g08b.7pgtqb0kdksnb2comluln",
+			"Actions": "ValidUsPhoneFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913i.q9ka5qe.o3g7cq.sq67ebai434hvqur2uq30",
+			"DATACLASS": "US Phone Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.jo7h0bt.q9t4ip.lr4vn6pr52h3dej8a2ac2",
+			"CLASSCODE": "USPHN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912k.gbjhmcm.m43up2.tv0r000qom9gbhmb72ma6",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912k.o2acnhj.vorbc3.j32mh48m9jgc24gc1l18h",
+			"DATACLASS": "Credit Card Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.nqgmmq5.vsdjvd.edisaha9sgubfa2bg1392",
+			"CLASSCODE": "CCN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912k.gbjhmcm.m43up2.tv0r000qom9gbhmb72ma6",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912k.o2acnhj.vorbc3.j32mh48m9jgc24gc1l18h",
+			"DATACLASS": "Credit Card Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.nqgmmq5.vsdjvd.edisaha9sgubfa2bg1392",
+			"CLASSCODE": "CCN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913f.21onmc0.lhfp4j.1m2h4s1ofl6d9oihtbuvb",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913f.aqg3b9h.6vssgt.l1qaulps634o0rb269nch",
+			"DATACLASS": "Credit Card Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.nqgmmq5.vsdjvd.edisaha9sgubfa2bg1392",
+			"CLASSCODE": "CCN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9130.v22m5mm.dkcu5d.4tjf68ihsb3p2g51ik4at",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9131.61btlcr.i7juoq.tk35s9vofl5e2krnn4udb",
+			"DATACLASS": "Credit Card Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.nqgmmq5.vsdjvd.edisaha9sgubfa2bg1392",
+			"CLASSCODE": "CCN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9130.v22m5mm.dkcu5d.4tjf68ihsb3p2g51ik4at",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9131.61btlcr.i7juoq.tk35s9vofl5e2krnn4udb",
+			"DATACLASS": "Credit Card Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.nqgmmq5.vsdjvd.edisaha9sgubfa2bg1392",
+			"CLASSCODE": "CCN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913f.21onmc0.lhfp4j.1m2h4s1ofl6d9oihtbuvb",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913f.aqg3b9h.6vssgt.l1qaulps634o0rb269nch",
+			"DATACLASS": "Credit Card Number",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.nqgmmq5.vsdjvd.edisaha9sgubfa2bg1392",
+			"CLASSCODE": "CCN"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912k.gbjhmcm.m43up2.tv0r000qom9gbhmb72ma6",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912k.o2acnhj.vorbc3.j32mh48m9jgc24gc1l18h",
+			"DATACLASS": "American Express Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.o781o70.4bbcj9.lf4it3t0asg3t8mo51aqi",
+			"CLASSCODE": "AMEX"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9130.v22m5mm.dkcu5d.4tjf68ihsb3p2g51ik4at",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9131.61btlcr.i7juoq.tk35s9vofl5e2krnn4udb",
+			"DATACLASS": "American Express Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.o781o70.4bbcj9.lf4it3t0asg3t8mo51aqi",
+			"CLASSCODE": "AMEX"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913f.21onmc0.lhfp4j.1m2h4s1ofl6d9oihtbuvb",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913f.aqg3b9h.6vssgt.l1qaulps634o0rb269nch",
+			"DATACLASS": "American Express Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.o781o70.4bbcj9.lf4it3t0asg3t8mo51aqi",
+			"CLASSCODE": "AMEX"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913f.21onmc0.lhfp4j.1m2h4s1ofl6d9oihtbuvb",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913f.aqg3b9h.6vssgt.l1qaulps634o0rb269nch",
+			"DATACLASS": "Diners Club Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.ojvs0ni.9a185n.komgf9nj2ccb1k15b6ea6",
+			"CLASSCODE": "DC"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9130.v22m5mm.dkcu5d.4tjf68ihsb3p2g51ik4at",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9131.61btlcr.i7juoq.tk35s9vofl5e2krnn4udb",
+			"DATACLASS": "Diners Club Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.ojvs0ni.9a185n.komgf9nj2ccb1k15b6ea6",
+			"CLASSCODE": "DC"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912k.gbjhmcm.m43up2.tv0r000qom9gbhmb72ma6",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912k.o2acnhj.vorbc3.j32mh48m9jgc24gc1l18h",
+			"DATACLASS": "Diners Club Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.ojvs0ni.9a185n.komgf9nj2ccb1k15b6ea6",
+			"CLASSCODE": "DC"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912k.gbjhmcm.m43up2.tv0r000qom9gbhmb72ma6",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912k.o2acnhj.vorbc3.j32mh48m9jgc24gc1l18h",
+			"DATACLASS": "Discover Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.ov5vr05.g42km8.8nhfptclp5q6401a309mu",
+			"CLASSCODE": "DSC"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9130.v22m5mm.dkcu5d.4tjf68ihsb3p2g51ik4at",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9131.61btlcr.i7juoq.tk35s9vofl5e2krnn4udb",
+			"DATACLASS": "Discover Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.ov5vr05.g42km8.8nhfptclp5q6401a309mu",
+			"CLASSCODE": "DSC"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913f.21onmc0.lhfp4j.1m2h4s1ofl6d9oihtbuvb",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913f.aqg3b9h.6vssgt.l1qaulps634o0rb269nch",
+			"DATACLASS": "Discover Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.ov5vr05.g42km8.8nhfptclp5q6401a309mu",
+			"CLASSCODE": "DSC"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913f.21onmc0.lhfp4j.1m2h4s1ofl6d9oihtbuvb",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913f.aqg3b9h.6vssgt.l1qaulps634o0rb269nch",
+			"DATACLASS": "Japan Credit Bureau (JCB)",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.pdi5p0q.c47ke7.n6gsaboo5o8mclr296k69",
+			"CLASSCODE": "JCB"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9130.v22m5mm.dkcu5d.4tjf68ihsb3p2g51ik4at",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9131.61btlcr.i7juoq.tk35s9vofl5e2krnn4udb",
+			"DATACLASS": "Japan Credit Bureau (JCB)",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.pdi5p0q.c47ke7.n6gsaboo5o8mclr296k69",
+			"CLASSCODE": "JCB"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912k.gbjhmcm.m43up2.tv0r000qom9gbhmb72ma6",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912k.o2acnhj.vorbc3.j32mh48m9jgc24gc1l18h",
+			"DATACLASS": "Japan Credit Bureau (JCB)",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.pdi5p0q.c47ke7.n6gsaboo5o8mclr296k69",
+			"CLASSCODE": "JCB"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912k.gbjhmcm.m43up2.tv0r000qom9gbhmb72ma6",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912k.o2acnhj.vorbc3.j32mh48m9jgc24gc1l18h",
+			"DATACLASS": "Master Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.pq9sp0g.4bjpnd.5r1r6m3srbn7dj5eu1qul",
+			"CLASSCODE": "MC"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913f.21onmc0.lhfp4j.1m2h4s1ofl6d9oihtbuvb",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913f.aqg3b9h.6vssgt.l1qaulps634o0rb269nch",
+			"DATACLASS": "Master Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.pq9sp0g.4bjpnd.5r1r6m3srbn7dj5eu1qul",
+			"CLASSCODE": "MC"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9130.v22m5mm.dkcu5d.4tjf68ihsb3p2g51ik4at",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9131.61btlcr.i7juoq.tk35s9vofl5e2krnn4udb",
+			"DATACLASS": "Master Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.pq9sp0g.4bjpnd.5r1r6m3srbn7dj5eu1qul",
+			"CLASSCODE": "MC"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9130.v22m5mm.dkcu5d.4tjf68ihsb3p2g51ik4at",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9131.61btlcr.i7juoq.tk35s9vofl5e2krnn4udb",
+			"DATACLASS": "VISA Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.q610t2i.0tce2h.jdtmiepmq2rhed1mavm63",
+			"CLASSCODE": "VISA"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912k.gbjhmcm.m43up2.tv0r000qom9gbhmb72ma6",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912k.o2acnhj.vorbc3.j32mh48m9jgc24gc1l18h",
+			"DATACLASS": "VISA Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.q610t2i.0tce2h.jdtmiepmq2rhed1mavm63",
+			"CLASSCODE": "VISA"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913f.21onmc0.lhfp4j.1m2h4s1ofl6d9oihtbuvb",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913f.aqg3b9h.6vssgt.l1qaulps634o0rb269nch",
+			"DATACLASS": "VISA Card",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8uls.q610t2i.0tce2h.jdtmiepmq2rhed1mavm63",
+			"CLASSCODE": "VISA"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912m.535v5ss.8nr751.5e1cc60vnobpmuv8gleao",
+			"Actions": "NameExists",
+			"RuleRID": "ec1481df.a5023b17.bcmmh95ds.6i2rnkc.cjl5kv.brbq2lismj863ov3b3l4f",
+			"DATACLASS": "Person Name",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8ult.831ihcf.ues2er.cds4sphegp5fe6bl30hdg",
+			"CLASSCODE": "PersonName"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9133.2nl2p87.cs2lcv.tbtrv0slk8vb0g42uieam",
+			"Actions": "NameExists",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9133.aovha2p.es1mhu.b4d7l0ir2e7h6cg63bv51",
+			"DATACLASS": "Person Name",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8ult.831ihcf.ues2er.cds4sphegp5fe6bl30hdg",
+			"CLASSCODE": "PersonName"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9133.2nl2p87.cs2lcv.tbtrv0slk8vb0g42uieam",
+			"Actions": "NameExists",
+			"RuleRID": "ec1481df.a5023b17.bcmmh98hp.30mprvv.je70jn.ff2pf0b2uoqfcgco70a8o",
+			"DATACLASS": "Person Name",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8ult.831ihcf.ues2er.cds4sphegp5fe6bl30hdg",
+			"CLASSCODE": "PersonName"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913h.f2m6rcp.do2eik.boo3uo0u0alae8ucd61qa",
+			"Actions": "NameExists",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913h.mbicuvk.u0v3ih.elcm1atm2kvl6jdqbc596",
+			"DATACLASS": "First Name",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8ult.8ht2vh5.e0qcif.lfojdjdd6gfmjnfe49qbo",
+			"CLASSCODE": "FirstName"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912m.535v5ss.8nr751.5e1cc60vnobpmuv8gleao",
+			"Actions": "NameExists",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912m.8ej6gkv.n8s1up.4q2kv91n7doobdejf0qpc",
+			"DATACLASS": "First Name",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8ult.8ht2vh5.e0qcif.lfojdjdd6gfmjnfe49qbo",
+			"CLASSCODE": "FirstName"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9133.2nl2p87.cs2lcv.tbtrv0slk8vb0g42uieam",
+			"Actions": "NameExists",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9133.aovha2p.es1mhu.b4d7l0ir2e7h6cg63bv51",
+			"DATACLASS": "First Name",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8ult.8ht2vh5.e0qcif.lfojdjdd6gfmjnfe49qbo",
+			"CLASSCODE": "FirstName"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9133.2nl2p87.cs2lcv.tbtrv0slk8vb0g42uieam",
+			"Actions": "NameExists",
+			"RuleRID": "ec1481df.a5023b17.bcmmh98hp.30mprvv.je70jn.ff2pf0b2uoqfcgco70a8o",
+			"DATACLASS": "First Name",
+			"dataClassRID": "f4951817.e469fa50.bcmmh8ult.8ht2vh5.e0qcif.lfojdjdd6gfmjnfe49qbo",
+			"CLASSCODE": "FirstName"
+		}
+	],
+	"AssetHasName": [
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912m.u1prfu6.mjbh89.qafouvdo4jrd76cdgn0pd",
+			"columnOrFieldName": "PHONE2",
+			"Actions": "ValidUsPhoneFormat",
+			"rulerid": "ec1481df.a5023b17.bcmmh912n.9h6q46o.un6tfu.krg0qrq1r85h538aaul6f"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912m.u1prfu6.mjbh89.qafouvdo4jrd76cdgn0pd",
+			"columnOrFieldName": "PHONE1",
+			"Actions": "ValidUsPhoneFormat",
+			"rulerid": "ec1481df.a5023b17.bcmmh912n.2em1hj9.p2b0fd.8kaf7khi1fbh64n38nk3j"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9134.6kkkhap.gttfkp.v7vs9888hjso6tkmp7iuk",
+			"columnOrFieldName": "PHONE1",
+			"Actions": "ValidUsPhoneFormat",
+			"rulerid": "ec1481df.a5023b17.bcmmh9134.ck21aod.u3ico8.be78d3ql951c2qfguejti"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913i.fj73epu.74g08b.7pgtqb0kdksnb2comluln",
+			"columnOrFieldName": "PHONE1",
+			"Actions": "ValidUsPhoneFormat",
+			"rulerid": "ec1481df.a5023b17.bcmmh913i.m7s6fpl.3ldg18.is0lvtlh8k9s3kd7b4mtc"
+		}
+	],
+	"AssetHasTermAttribute": [
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912l.1av0bnu.29c7tk.ngnma8oskrp8vtse8ps9j",
+			"AttributeRID": "721f6090.6acd460b.bdn6gf7fi.t92l3so.gbi5km.t61fe2mfc18dkoigmap9t",
+			"Attribute": "isCDE",
+			"Actions": "EmailAddrValidFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912l.6gsag7j.b9s209.74i17e9o2mtjttdp57700",
+			"Terms": "EMAIL",
+			"AttrVARGRAPHICValue": "YES",
+			"TermRID": "6662c0f2.e1b1ec6c.ktsmaiceo.96fdefn.iqto2e.tg5hffoovm0roujfc7f8k"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912l.1av0bnu.29c7tk.ngnma8oskrp8vtse8ps9j",
+			"AttributeRID": "721f6090.6acd460b.ktsm8a4ce.hqo6aim.pc9e6u.58pj155cbo9930hraae6t",
+			"Attribute": "Is Searchabl",
+			"Actions": "EmailAddrValidFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912l.6gsag7j.b9s209.74i17e9o2mtjttdp57700",
+			"Terms": "EMAIL",
+			"AttrVARGRAPHICValue": "FALSE",
+			"TermRID": "6662c0f2.e1b1ec6c.ktsmaiceo.96fdefn.iqto2e.tg5hffoovm0roujfc7f8k"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9131.ej68ldv.gvi04o.9maidodqi6671i3raat2v",
+			"AttributeRID": "721f6090.6acd460b.bdn6gf7fi.t92l3so.gbi5km.t61fe2mfc18dkoigmap9t",
+			"Attribute": "isCDE",
+			"Actions": "EmailAddrValidFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9131.io433g6.tbrafj.rg4ngjl2mbeql355vqqdo",
+			"Terms": "EMAIL",
+			"AttrVARGRAPHICValue": "YES",
+			"TermRID": "6662c0f2.e1b1ec6c.ktsmaiceo.96fdefn.iqto2e.tg5hffoovm0roujfc7f8k"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9131.ej68ldv.gvi04o.9maidodqi6671i3raat2v",
+			"AttributeRID": "721f6090.6acd460b.ktsm8a4ce.hqo6aim.pc9e6u.58pj155cbo9930hraae6t",
+			"Attribute": "Is Searchabl",
+			"Actions": "EmailAddrValidFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9131.io433g6.tbrafj.rg4ngjl2mbeql355vqqdo",
+			"Terms": "EMAIL",
+			"AttrVARGRAPHICValue": "FALSE",
+			"TermRID": "6662c0f2.e1b1ec6c.ktsmaiceo.96fdefn.iqto2e.tg5hffoovm0roujfc7f8k"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913f.va33ail.egu8i1.sc257t8kfn9iufgrispav",
+			"AttributeRID": "721f6090.6acd460b.bdn6gf7fi.t92l3so.gbi5km.t61fe2mfc18dkoigmap9t",
+			"Attribute": "isCDE",
+			"Actions": "EmailAddrValidFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913g.80m5ng0.2qr8tp.e9ea7j357c5g53lu7s6pn",
+			"Terms": "EMAIL",
+			"AttrVARGRAPHICValue": "YES",
+			"TermRID": "6662c0f2.e1b1ec6c.ktsmaiceo.96fdefn.iqto2e.tg5hffoovm0roujfc7f8k"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913f.va33ail.egu8i1.sc257t8kfn9iufgrispav",
+			"AttributeRID": "721f6090.6acd460b.ktsm8a4ce.hqo6aim.pc9e6u.58pj155cbo9930hraae6t",
+			"Attribute": "Is Searchabl",
+			"Actions": "EmailAddrValidFormat",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913g.80m5ng0.2qr8tp.e9ea7j357c5g53lu7s6pn",
+			"Terms": "EMAIL",
+			"AttrVARGRAPHICValue": "FALSE",
+			"TermRID": "6662c0f2.e1b1ec6c.ktsmaiceo.96fdefn.iqto2e.tg5hffoovm0roujfc7f8k"
+		}
+	],
+	"AssetHasAttribute": [
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh912k.gbjhmcm.m43up2.tv0r000qom9gbhmb72ma6",
+			"AttributeRID": "721f6090.6acd460b.bf4mgj464.r2moh53.vjbo6q.uck1nipch7t8dj5q09sig",
+			"Attribute": "CDE",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh912k.o2acnhj.vorbc3.j32mh48m9jgc24gc1l18h",
+			"AttrVARGRAPHICValue": "operational"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh9130.v22m5mm.dkcu5d.4tjf68ihsb3p2g51ik4at",
+			"AttributeRID": "721f6090.6acd460b.bf4mgj464.r2moh53.vjbo6q.uck1nipch7t8dj5q09sig",
+			"Attribute": "CDE",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh9131.61btlcr.i7juoq.tk35s9vofl5e2krnn4udb",
+			"AttrVARGRAPHICValue": "operational"
+		},
+		{
+			"ActionsRID": "ec1481df.3f9ef141.bcmmh913f.21onmc0.lhfp4j.1m2h4s1ofl6d9oihtbuvb",
+			"AttributeRID": "721f6090.6acd460b.bf4mgj464.r2moh53.vjbo6q.uck1nipch7t8dj5q09sig",
+			"Attribute": "CDE",
+			"Actions": "CreditCardMatchesRegex",
+			"RuleRID": "ec1481df.a5023b17.bcmmh913f.aqg3b9h.6vssgt.l1qaulps634o0rb269nch",
+			"AttrVARGRAPHICValue": "operational"
+		}
+	]
+}

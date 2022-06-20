@@ -1,0 +1,19 @@
+description = "Insights Common Library"
+
+dependencies {
+
+    implementation project(':ms-e2e-test-suit-storage')
+    compileOnly (configurations.commonJars) {
+        exclude group: 'org.slf4j'
+        exclude group: 'org.apache.logging.log4j'
+    }
+    compileOnly configurations.libertyJars
+}
+
+publishing {
+    publications {
+       mavenJava(MavenPublication) {
+           from components.java
+       }
+    }
+}

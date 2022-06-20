@@ -1,0 +1,472 @@
+description = 'Manage services Sanity test for IBM CP4D'
+
+buildscript {
+  repositories {
+        mavenLocal()
+        mavenCentral()
+        maven {
+			url "https://artifacts.alfresco.com/nexus/content/repositories/public/"
+		}
+    }
+    dependencies {
+        classpath group: 'io.openliberty.tools', name: 'liberty-gradle-plugin', version: '3.1.2'
+        classpath group: 'org.alfresco', name: 'alfresco-repository', version: '4.0.d'
+        //classpath "io.spring.gradle:dependency-management-plugin:1.0.4.RELEASE"
+    }
+}
+
+wrapper.gradleVersion = '5.1.1'
+
+allprojects {
+  //apply plugin: 'checkstyle'
+  apply plugin: 'eclipse'
+  //apply plugin: 'findbugs'
+  apply plugin: 'jacoco'
+  apply plugin: 'maven-publish'
+
+  repositories {
+    mavenCentral()
+    mavenCentral()
+        maven {
+			url "https://artifacts.alfresco.com/nexus/content/repositories/public/"
+		}
+  }
+
+  group = project['default.group']
+  version = System.env.TRAVIS_TAG ?: System.env.TRAVIS_BUILD_NUMBER ? (project['current.code.version'] =~ /^(\d+\.\d+\.).*$/ )[0][1] + System.env.TRAVIS_BUILD_NUMBER + "-SNAPSHOT" : project['current.code.version']
+  ext {
+      commitHash = System.getenv('TRAVIS_COMMIT') ? System.getenv('TRAVIS_COMMIT').substring(0,12) : new Date().format('yyyyMMddHHmmssSSS')
+      build_version = System.env.TRAVIS_TAG ?: System.env.TRAVIS_BUILD_NUMBER ? "b" + System.env.TRAVIS_BUILD_NUMBER + "_" + commitHash : project['current.code.version']
+      defaultDbType="db2"
+      dbType = defaultDbType
+      if (System.getProperty("dbType") != null ) {
+         dbType = System.getProperty("dbType")
+         println "Setting dbType from System Property-dbType=" + dbType
+      } else if (System.getenv("INSIGHTS_SERVICE_INSIGHTS_DB_TYPE") != null ) {
+         dbType = System.getenv("INSIGHTS_SERVICE_INSIGHTS_DB_TYPE")
+         println "Setting dbType from Environmentdbtype var INSIGHTS_SERVICE_INSIGHTS_DB_TYPE=" + dbType
+      } else if (System.getenv("INSIGHTS_DB_TYPE") != null ) {
+         dbType = System.getenv("INSIGHTS_DB_TYPE")
+         println "Setting dbType from Environmentdbtype var INSIGHTS_DB_TYPE=" + dbType
+      }
+      if (dbType != defaultDbType && dbType != "oracle" && dbType != "sqlserver") {
+        println "dbType has unsupported value=" + dbType
+        dbType = defaultDbType
+        println "Setting dbType to default Value for build only defaultDbType=" + dbType
+        println "!!! Tests may choose the value from properties files !!!"
+        println "!!! For local Liberty deploy will choose the value from properties files, so both should match !!!"
+      }
+  }
+  
+  configurations.all {
+    exclude group: 'log4j', module: 'log4j'
+    exclude group: 'org.slf4j', module: 'slf4j-log4j12'
+  }
+  
+  configurations {
+    commonJars
+    libertyJars
+    loggingJars
+  }
+
+  dependencies {
+      commonJars group: 'org.apache.wink', name: 'wink-json4j', version: project['org.apache.wink.json4j.version']
+      
+      commonJars group: 'org.apache.httpcomponents', name: 'httpclient', version: project['httpclient.version']
+      commonJars group: 'org.apache.httpcomponents', name: 'httpcore', version: project['httpcore.version']
+      commonJars group: 'org.apache.commons', name: 'commons-io', version: project['apache.commons.version']
+      commonJars group: 'com.github.michael-rapp', name: 'apriori', version: project['apriori.version']
+      //update apriori dependencies to latest vesrion
+      commonJars group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib', version: project['kotlin-stdlib.version'] //1.3.30
+      commonJars group: 'org.jetbrains.kotlin', name: 'kotlin-stdlib-jdk8', version: project['kotlin-stdlib.version']
+      commonJars group: 'org.apache.zookeeper', name: 'zookeeper', version: project['zookeeper.version']
+      commonJars group: 'com.cloudant', name: 'cloudant-client', version: project['cloudant.client.version']
+      commonJars group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: project['jackson.version']      
+      commonJars group: 'com.cloudant', name: 'cloudant-client', version: project['cloudant.client.version']
+	  commonJars group: 'io.netty', name: 'netty-codec', version: project['netty-codec.version']
+	  commonJars group: 'io.netty', name: 'netty-handler', version: project['netty-codec.version']
+      
+      //Anomaly detection dependencies
+      commonJars group: 'commons-fileupload', name: 'commons-fileupload', version: project['commons.fileupload.version']	  
+      commonJars group: 'com.apporiented', name: 'hierarchical-clustering', version: project['hierarchical.clustering.version']
+      commonJars group: 'com.ibm.websphere.appserver.api', name: 'com.ibm.websphere.appserver.api.jaxrs20', version: project['api.jaxrs20.version']
+      commonJars group: 'org.json', name: 'json', version: project['org.json.version']	
+      commonJars group: 'mysql', name: 'mysql-connector-java', version: project['mysql.connector.java.version']
+      commonJars group: 'org.apache.commons', name: 'commons-lang3', version: project['commons.lang3.version']
+      commonJars group: 'org.apache.commons', name: 'commons-math3', version: project['commons.math3.version']
+      commonJars group: 'org.apache.commons', name: 'commons-csv', version: project['commons.csv.version']
+      commonJars group: 'javax.activation', name: 'activation', version: project['activation.version']
+      
+      libertyJars group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: project['javax.ws.rs-api.version']
+      libertyJars group: 'javax.servlet', name: 'javax.servlet-api', version: project['javax.servlet.api.version']
+      libertyJars group: 'javax.inject', name: 'javax.inject', version: '1'
+      libertyJars group: 'io.swagger', name: 'swagger-annotations', version: project['swagger.annotations.version']
+      libertyJars group: 'javax.enterprise.concurrent', name: 'javax.enterprise.concurrent-api', version: project['javax.enterprise.concurrent.version']
+      
+      loggingJars group: 'org.slf4j', name: 'slf4j-api', version: project['slf4j.version']
+      loggingJars group: 'org.apache.logging.log4j', name: 'log4j-slf4j-impl', version: project['log4j.version']
+      loggingJars group: 'org.apache.logging.log4j', name: 'log4j-api', version: project['log4j.version']
+      loggingJars group: 'org.apache.logging.log4j', name: 'log4j-core', version: project['log4j.version']
+      loggingJars group: 'org.apache.logging.log4j', name: 'log4j-web', version: project['log4j.version']
+
+  }
+  
+  
+/*
+  configurations {
+    checkstyleConfig
+    all {checkstyle
+      resolutionStrategy {
+        cacheChangingModulesFor 0, 'seconds'
+      }
+    }
+  }
+  dependencies {
+    checkstyleConfig 'com.ibm.iig.gov.dev:checkstyle-config:0.2.0-SNAPSHOT@zip'
+  }
+  checkstyle {
+    toolVersion = '8.2'
+    config = resources.text.fromArchiveEntry(configurations.checkstyleConfig, ".xml")
+  }
+  findbugs {
+    toolVersion = "3.0.1"
+    ignoreFailures = true // false
+    effort = "max"
+    reportLevel = "low" // report all bugs
+  }
+  tasks.withType(FindBugs) {
+    reports {
+      xml.enabled false
+      html.enabled true
+    }
+  }
+*/
+}
+
+subprojects {
+  apply plugin: 'java'
+  apply plugin: 'eclipse-wtp'
+
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+
+  dependencies {
+    // logging
+    implementation configurations.loggingJars
+    testImplementation configurations.loggingJars
+
+    // coding utils
+    compileOnly group: 'com.google.code.findbugs', name: 'findbugs', version: project['findbugs.version']
+    testCompileOnly group: 'com.google.code.findbugs', name: 'annotations', version: project['findbugs.version']
+  }
+  
+  project.jar {
+    manifest {
+      attributes('Implementation-Title': 'IBM Information Server Insights API',
+                 'Implementation-Vendor': 'IBM',
+                 'Implementation-Version': build_version)
+    }
+  }
+  
+  eclipse {
+    jdt {
+      javaRuntimeName = 'JavaSE-1.8'
+    }
+    project {
+      // groovy natures is required to avoid eclipse build errors on *.gradle files
+      natures 'org.eclipse.jdt.groovy.core.groovyNature', 'org.eclipse.jdt.core.javanature'
+    }
+    classpath {
+      downloadSources = true
+      downloadJavadoc = true
+      defaultOutputDir = file('bin')
+    }
+  }
+
+  jacocoTestReport {
+    reports {
+      xml.enabled false
+      csv.enabled false
+      html.destination file("${buildDir}/reports/tests/coverage")
+    }
+  }
+}
+
+//
+// Code Coverage Reporting
+//
+
+jacoco {
+  reportsDir = file("$buildDir/reports/coverage")
+}
+
+task jacocoRootReport(type: JacocoReport) {
+  def subprojectsToCover = rootProject.subprojects
+  dependsOn subprojectsToCover.test
+  //sourceDirectories = files(subprojectsToCover.sourceSets.main.allSource.srcDirs)
+  //classDirectories = files(subprojectsToCover.sourceSets.main.output)
+  subprojectsToCover.each {
+    executionData fileTree(it.projectDir.absolutePath).include("**/build/jacoco/*.exec")
+  }
+  reports {
+    xml.enabled false
+    csv.enabled true
+    html.enabled true
+  }
+}
+
+task check {
+  dependsOn subprojects.collect { p -> p.tasks.matching { it.name == 'check' } }
+}
+
+//check.finalizedBy jacocoRootReport
+
+task printCoverage(type: Exec) {
+  commandLine 'gawk', '-F,',
+    'BEGIN{it=0;ic=0;bt=0;bc=0;lt=0;lc=0;columnCmd="column -ts,"}' +
+    '{' +
+    '  if (NR==1) print "CLASS,INSTRUCTION,BRANCH,LINE" |& columnCmd; ' +
+    '  else {' +
+    '    it+=$4+$5; ic+=$5; bt+=$6+$7; bc+=$7; lt+=$8+$9; lc+=$9; ' +
+    '    printf("%s,%s,%s,%s\\n", $2"."$3, $4+$5 ? sprintf("%.2f%%", $5*100/($4+$5)) : "n/a", $6+$7 ? sprintf("%.2f%%", $7*100/($6+$7)) : "n/a", $8+$9 ? sprintf("%.2f%%", $9*100/($8+$9)) : "n/a") |& columnCmd' +
+    '  }' +
+    '}' +
+    'END{' +
+    '  printf("%s,%s,%s,%s\\n", "Total", it ? sprintf("%.2f%%", ic*100/it) : "n/a", bt ? sprintf("%.2f%%", bc*100/bt) : "n/a", lt ? sprintf("%.2f%%", lc*100/lt) : "n/a") |& columnCmd; ' +
+    '  close(columnCmd, "to"); print ""; while((columnCmd |& getline line) > 0) printf("  %s\\n", line); print ""; close(columnCmd)' +
+    '}',
+    "${buildDir}/reports/coverage/jacocoRootReport/jacocoRootReport.csv"
+  onlyIf {
+    !System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')
+  }
+}
+
+//jacocoRootReport.finalizedBy printCoverage
+
+//
+// Liberty Runtime Setup
+//
+
+apply plugin: 'liberty'
+
+dependencies {
+    //libertyRuntime group: 'com.ibm.websphere.appserver.runtime', name: 'wlp-webProfile7', version: project['wlp-webProfile7.version']
+    libertyRuntime group: 'io.openliberty', name: 'openliberty-runtime', version: '19.0.0.12'
+}
+
+ext {
+  libertyDir = "${buildDir}/wlp"
+  libertyServerName = "${project.name}"
+}
+
+
+liberty {
+  server {
+    name = libertyServerName
+    configDirectory = file('config/liberty')
+    serverXmlFile = file('config/liberty/server.xml_')
+    //libertyRuntimeConfiguration = file('config/liberty/server.xml_')
+    bootstrapPropertiesFile = file("config/liberty/bootstrap_db2.properties")
+    // jvmOptionsFile = file('config/liberty/jvm.options')
+    serverEnvFile = file('config/liberty/server.env')
+  }
+}
+
+task libertyCopyDataSourceXml(type: Copy, dependsOn: libertyCreate) {
+  from "${libertyDir}/usr/servers/${libertyServerName}/configDropins/available/ds_${dbType}.xml"
+  into "${libertyDir}/usr/servers/${libertyServerName}/configDropins/defaults"
+  eachFile { println "Copying " + it.name + " to " + buildDir.name + "/wlp/usr/servers/${libertyServerName}/configDropins/defaults"  }
+}
+
+task libertyInstallUtility(type: Exec, dependsOn: libertyCopyDataSourceXml) {
+  if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
+    commandLine 'cmd', '/c', "${libertyDir}/bin/installUtility", 'install', '--acceptLicense', libertyServerName
+  } else {
+    commandLine "${libertyDir}/bin/installUtility", 'install', '--acceptLicense', libertyServerName
+  }
+}
+// slf4j-log4j12-1.7.16.jar
+// log4j-1.2.17.jar
+task copyCommonJars(type: Copy, dependsOn: libertyCreate) {
+  into "${libertyDir}/usr/servers/${libertyServerName}/lib/insights"
+  from (configurations.commonJars) {
+     exclude 'log4j-*.jar'
+     exclude 'slf4j-log4j12-*.jar'
+     exclude 'slf4j-api-*.jar'
+  }
+  from (configurations.loggingJars)
+  eachFile { println "Copying " + it.name + " to " + buildDir.name + "/wlp/usr/servers/${libertyServerName}/lib/insights"  }
+}
+
+task showLibertyInfo {
+  doLast {
+    println "libertyDir=" + libertyDir
+    println "libertyServerName=" + libertyServerName
+    println "dbType=" + dbType
+  }
+}
+
+task setupLiberty(dependsOn: [ showLibertyInfo, libertyInstallUtility, copyCommonJars ]) {
+  libertyInstallUtility.mustRunAfter showLibertyInfo
+  copyCommonJars.mustRunAfter libertyInstallUtility
+}
+
+task libertyDirClean(type: Delete, dependsOn: libertyStop) {
+   doFirst { println "Deleting ${buildDir}/wlp" }
+   delete "${buildDir}/wlp"
+}
+
+
+// Configure common task and configuration of war subprojects
+
+def warProjects() {
+    subprojects.findAll { subproject -> subproject.plugins.hasPlugin('war') && subproject.name == 'gov-insights-rest' }
+}
+
+// Docker Configuration
+
+ext {
+  setImageTag = false
+  branchName = System.getenv('TRAVIS_BRANCH') ?: "local"
+  travisTag = System.getenv('TRAVIS_TAG')?.trim() ?: 'latest'
+  travisBuildNumber = project.build_version
+  // if tag is provided use release repo else staging 
+  dockerRegistry = "${travisTag != 'latest' ? 'hyc-ug-releases-docker-local' : 'hyc-ug-staging-docker-local'}.artifactory.swg-devops.com"
+  // if tag is not provided and branch is not develop use build_number for docker image tag
+  // latest tag to be used only for develop branch
+  if (travisTag == 'latest' && branchName != 'develop') {
+     travisTag = project.build_version
+  }
+  // if latest tag is used, need to add build# as one more tag
+  if (travisTag == 'latest' ) {
+     setImageTag = true
+  }
+  imageName = "${dockerRegistry}/${project.name}-service"
+  // If TRAVIS_TAG is provided use it in imageFullName - no need for additional tag
+  imageFullName = "${imageName}:" + travisTag
+  // else if TRAVIS_BUILD_NUMBER is provided use it for additional tag with build number
+  imageTag = "${imageName}:" + travisBuildNumber
+}
+
+task showProjectInfo {
+  doLast {
+    println "group=" + project.group
+    println "version=" + project.version
+    println "build_version=" + project.build_version
+    println "dockerRegistry=" + dockerRegistry
+    println "imageName=" + imageName
+    println "travisTag=" + travisTag
+    println "travisBuildNumber=" + travisBuildNumber
+    println "imageFullName=" + imageFullName
+    println "imageTag=" + imageTag
+    println "setImageTag=" + setImageTag
+    println "branch=" + branchName
+  }
+}
+tasks.check.dependsOn showProjectInfo
+
+task dockerCopyLibs(type: Copy) {
+  from (configurations.commonJars) {
+     exclude 'log4j-*.jar'
+     exclude 'slf4j-log4j12-*.jar'
+     exclude 'slf4j-api-*.jar'
+  }
+  from (configurations.loggingJars)
+  
+  into "${buildDir}/docker/lib"
+  eachFile { println "Copying " + it.name + " to " + buildDir.name + "/docker/lib"  }
+}
+
+task dockerCopyServerConfig(type: Copy) {
+  def configDir = 'config/liberty'
+
+  from (configDir) {
+    include 'server.xml_'
+    rename { 'server.xml' }
+  }
+  
+  from (configDir) {
+    include 'log4j2.xml'
+  }
+  
+  from (configDir) {
+    include 'jvm.options.docker'
+    rename { 'jvm.options' }
+  }
+  
+  from (configDir) {
+    include 'configDropins/**'
+  }
+  
+  from (configDir) {
+  	include 'server.env'
+  }
+  
+  into "${buildDir}/docker"
+  eachFile { println "Copying " + configDir + "/" + it.relativePath + " to " + buildDir.name + "/docker/"  }
+}
+
+task dockerDirClean(type: Delete) {
+   doFirst { println "Deleting ${buildDir}/docker" }
+   delete "${buildDir}/docker"
+}
+
+gradle.projectsEvaluated {
+  // Configure all war projects to copy wars to apps dir of liberty or docker
+  configure(warProjects()) {
+    // Copy/Deploy wars to liberty/apps dir
+    task deploy(type: Copy, overwrite: true, dependsOn: war, description: "deploy ${project.name}.war") {
+      doFirst { println "Copying " + war.archiveName + " to " + rootProject.buildDir.name + "/wlp/usr/servers/${libertyServerName}/apps/${project.name}.war" }
+      from (war) {
+        rename war.archiveName, "${project.name}.war"
+      }
+      into "${libertyDir}/usr/servers/${libertyServerName}/apps"
+    }
+    // Copy Apps/wars to docker/apps dir 
+    task dockerCopyApps(type: Copy, dependsOn: war) {
+        doFirst { println "Copying " + war.archiveName + " to " + rootProject.buildDir.name + "/docker/apps/${project.name}.war" }
+        from (war) {
+            rename war.archiveName, "${project.name}.war"
+        }
+        into "${rootProject.buildDir}/docker/apps"
+    }
+  }     
+
+  task dockerCopyApps() {
+     warProjects().each {
+         dependsOn(it.tasks.dockerCopyApps)
+     }
+  }
+
+/* 
+  task dockerLogin(type: Exec) {
+    def username = project.hasProperty('artifactoryUsername') ? artifactoryUsername : System.getenv('ARTIFACTORY_USERNAME')
+    def password = project.hasProperty('artifactoryApiKey') ? artifactoryApiKey : System.getenv('ARTIFACTORY_API_KEY')
+    workingDir projectDir
+    commandLine 'docker', 'login', "-u=${username}", "-p=${password}", dockerRegistry
+  }
+*/
+
+  task dockerBuildImage(type: Exec, dependsOn: [ dockerCopyApps, dockerCopyLibs, dockerCopyServerConfig, showProjectInfo ]) {
+    doFirst {
+      println "Docker Image    - " + imageFullName
+      println "Docker Registry - " + dockerRegistry
+    }
+    workingDir projectDir
+    commandLine 'docker', 'build', '-t', imageFullName, '-f', 'Dockerfile', '.'
+  }
+
+  task dockerTagImage(type: Exec, dependsOn: dockerBuildImage) {
+    workingDir projectDir
+    commandLine 'docker', 'tag', imageFullName, imageTag
+    onlyIf {
+      setImageTag != false
+    }
+  }
+
+  task dockerPushImage(type: Exec, dependsOn: [ dockerBuildImage, dockerTagImage ]) {
+    workingDir projectDir
+    commandLine 'docker', 'push', imageName
+  }
+
+}

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ImportParameters bridgeDisplayName="JDBC Connector" bridgeId="CAS/JDBCConnector__1.0" bridgeVersion="1.0_1.0" release="11.7.1.0">
+  <CompositeParameter isRequired="true" displayName="Data connection" id="DataConnection" type="DATA_CONNECTION">
+    <Parameter isRequired="true" displayName="Name" id="dcName_">
+      <value>insights_connection_TEST_SUFFIX</value>
+    </Parameter>
+    <Parameter displayName="Description" id="dcDescription_">
+      <value>connection to load test data for insights service</value>
+    </Parameter>
+    <Parameter isRequired="true" displayName="URL" id="URL">
+      <value>jdbc:db2://DATABASE_HOST:DATABASE_PORT/DATABASE_NAME</value>
+    </Parameter>
+    <Parameter displayName="User name" id="Username">
+      <value>DATABASE_USER_NAME</value>
+    </Parameter>
+    <!-- IMPORTANT: Specify a value for the password here, or by using command-line arguments. -->
+    <Parameter displayName="Password" id="Password">
+      <value>DATABASE_PASSWORD</value>
+    </Parameter>
+    <Parameter displayName="Attributes" id="Attributes"/>
+  </CompositeParameter>
+  <Parameter displayName="Include tables" id="includeTables" type="BOOLEAN">
+    <value>True</value>
+  </Parameter>
+  <Parameter displayName="Include views" id="includeViews" type="BOOLEAN">
+    <value>True</value>
+  </Parameter>
+  <Parameter displayName="Include other objects" id="includeOthers" type="BOOLEAN">
+    <value>False</value>
+  </Parameter>
+  <Parameter displayName="Generate all columns as Unicode" id="GenerateAllColumnsAsUnicode" type="BOOLEAN">
+    <value>False</value>
+  </Parameter>
+  <Parameter displayName="Include system objects" id="IncludeSystemObjects" type="BOOLEAN">
+    <value>False</value>
+  </Parameter>
+  <Parameter displayName="Schema name filter" id="SchemaNameFilter">
+    <value></value>
+  </Parameter>
+  <Parameter displayName="Use regular expression in schema&#xa;name filter" id="UseRegexInSchemaNameFilter" type="BOOLEAN">
+    <value>False</value>
+  </Parameter>
+  <Parameter displayName="Table name filter" id="TableNameFilter">
+    <value></value>
+  </Parameter>
+  <Parameter displayName="Assets to import" id="AssetsToImport">
+    <value>schema[DATABASE_NAME|DATABASE_SCHEMA]</value>
+  </Parameter>
+  <Parameter displayName="Import schema structure" id="ImportSchemaStructure" type="BOOLEAN">
+    <value>True</value>
+  </Parameter>
+  <Parameter displayName="Import table structure" id="ImportTableStructure" type="BOOLEAN">
+    <value>True</value>
+  </Parameter>
+  <Parameter displayName="Ignore table access&#xa;errors" id="IgnoreTableAccessErrors" type="BOOLEAN">
+    <value>False</value>
+  </Parameter>
+  <Parameter displayName="If an asset description already exists" id="Asset_description_already_exists">
+    <displayValue>Replace the existing description</displayValue>
+    <value>Replace_existing_description</value>
+  </Parameter>
+  <Parameter isRequired="true" displayName="Host system name" id="AP_Host system name">
+    <value>BANKDEMO_HOST</value>
+  </Parameter>
+  <Parameter displayName="Database name" id="AP_Database name">
+    <value></value>
+  </Parameter>
+  <Parameter displayName="DBMS server instance&#xa;name" id="AP_DBMS server instance name">
+    <value></value>
+  </Parameter>
+</ImportParameters>

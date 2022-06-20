@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<iaapi:Project xmlns:iaapi="http://www.ibm.com/investigate/api/iaapi" name="SAR_WS3">
+  <DataSources>
+    <DataSource host="BANKDEMO_HOST" name="DATABASE_NAME">
+      <Schema name="DATABASE_SCHEMA">
+        <Table name="BANK_CLIENTS">
+          <Column name="PROFESSION"/>
+          <Column name="PHONE2"/>
+          <Column name="ACCOUNT_ID"/>
+          <Column name="AVERAGE_BALANCE"/>
+          <Column name="MARITAL_STATUS"/>
+          <Column name="RTN"/>
+          <Column name="NBR_YEARS_CLI"/>
+          <Column name="PHONE1"/>
+          <Column name="CC"/>
+          <Column name="SAVINGS_ACCOUNT"/>
+          <Column name="EMAIL"/>
+          <Column name="ONLINE_ACCESS"/>
+          <Column name="BANKCARD"/>
+          <Column name="JOINED_ACCOUNTS"/>
+          <Column name="NAME"/>
+          <Column name="GENDER"/>
+          <Column name="CCN"/>
+          <Column name="ACCOUNT_TYPE"/>
+          <Column name="AGE"/>
+          <Column name="ZIP"/>
+          <Column name="CONTACT"/>
+          <Column name="CLIENT_ID"/>
+          <Column name="ADDRESS"/>
+          <VirtualColumn name="SQL190120163547670">
+            <Concatenation nullValueReplacement="^" padChar=" " quoteChar="\&quot;" separator="|">
+              <Column name="CLIENT_ID"/>
+              <Column name="ACCOUNT_ID"/>
+            </Concatenation>
+          </VirtualColumn>
+        </Table>
+        <Table name="BANK_CUSTOMERS">
+          <Column name="PHONE2"/>
+          <Column name="CREDIT_RATING"/>
+          <Column name="CC"/>
+          <Column name="PROFESSION"/>
+          <Column name="EMAIL"/>
+          <Column name="ZIP"/>
+          <Column name="MARITAL_STATUS"/>
+          <Column name="NAME"/>
+          <Column name="CCN"/>
+          <Column name="PHONE1"/>
+          <Column name="GENDER"/>
+          <Column name="AGE"/>
+          <Column name="NBR_YEARS_CLI"/>
+          <Column name="CUSTOMER_ID"/>
+          <Column name="ADDRESS"/>
+          <Column name="CONTACT"/>
+        </Table>
+        <Table name="BANK_ACCOUNTS">
+          <Column name="RTN"/>
+          <Column name="CARDNB"/>
+          <Column name="JOINT_ACCOUNT_HOLDER"/>
+          <Column name="ACCOUNT_ID"/>
+          <Column name="ACCOUNT_TYPE"/>
+          <Column name="ACCOUNT_BALANCE"/>
+          <Column name="CUSTOMER_ID"/>
+          <Column name="BANKCARD"/>
+          <Column name="ONLINE_ACCESS"/>
+          <VirtualColumn name="SQL190120163547060">
+            <Concatenation nullValueReplacement="^" padChar=" " quoteChar="\&quot;" separator="|">
+              <Column name="ACCOUNT_ID"/>
+              <Column name="CUSTOMER_ID"/>
+              <Column name="ACCOUNT_TYPE"/>
+            </Concatenation>
+          </VirtualColumn>
+        </Table>
+        <Table name="CHECKING_ACCOUNTS">
+          <Column name="ACCOUNT_BALANCE"/>
+          <Column name="JOINT_ACCOUNT_HOLDER"/>
+          <Column name="BANKCARD"/>
+          <Column name="ONLINE_ACCESS"/>
+          <Column name="ACCOUNT_ID"/>
+          <Column name="CARDNB"/>
+          <Column name="ACCOUNT_HOLDER_ID"/>
+          <Column name="RTN"/>
+          <VirtualColumn name="SQL190120163549060">
+            <Concatenation nullValueReplacement="^" padChar=" " quoteChar="\&quot;" separator="|">
+              <Column name="ACCOUNT_ID"/>
+              <Column name="ACCOUNT_HOLDER_ID"/>
+            </Concatenation>
+          </VirtualColumn>
+        </Table>
+        <Table name="SAVINGS_ACCOUNTS">
+          <Column name="ACCOUNT_BALANCE"/>
+          <Column name="ACCOUNT_ID"/>
+          <Column name="BANKCARD"/>
+          <Column name="ONLINE_ACCESS"/>
+          <Column name="ACCOUNT_HOLDER_ID"/>
+          <Column name="JOINT_ACCOUNT_HOLDER"/>
+          <Column name="RTN"/>
+          <VirtualColumn name="SQL190120163550380">
+            <Concatenation nullValueReplacement="^" padChar=" " quoteChar="\&quot;" separator="|">
+              <Column name="ACCOUNT_ID"/>
+              <Column name="ACCOUNT_HOLDER_ID"/>
+            </Concatenation>
+          </VirtualColumn>
+        </Table>
+        <Table name="ACCOUNT_HOLDERS">
+          <Column name="NAME"/>
+          <Column name="PROFESSION"/>
+          <Column name="GENDER"/>
+          <Column name="NBR_YEARS_CLI"/>
+          <Column name="CCN"/>
+          <Column name="MARITAL_STATUS"/>
+          <Column name="PHONE1"/>
+          <Column name="CONTACT"/>
+          <Column name="CC"/>
+          <Column name="EMAIL"/>
+          <Column name="ACCOUNT_HOLDER_ID"/>
+          <Column name="PHONE2"/>
+          <Column name="ZIP"/>
+          <Column name="ADDRESS"/>
+          <Column name="AGE"/>
+        </Table>
+      </Schema>
+    </DataSource>
+  </DataSources>
+  <DataRuleDefinitions>
+    <DataRuleDefinition folder="All" name="AddressExists" status="CANDIDATE">
+      <description>Address Exists; null and blank value check</description>
+      <LongDescription>Address Exists; null and blank value check</LongDescription>
+      <Variables>
+        <Variable dataType="string" name="address"/>
+      </Variables>
+      <expression>Address EXISTS AND len(trim(Address)) &lt;> 0</expression>
+    </DataRuleDefinition>
+    <DataRuleDefinition folder="All" name="AlphaFormatValid" status="CANDIDATE">
+      <description>Example Alphabetic Format; excludes null values</description>
+      <LongDescription>Example Alphabetic Format; excludes null values</LongDescription>
+      <Variables>
+        <Variable dataType="string" name="field1"/>
+      </Variables>
+      <expression>IF  Field1  EXISTS THEN Field1 MATCHES_FORMAT 'AAAA'</expression>
+    </DataRuleDefinition>
+    <DataRuleDefinition folder="All" name="CityExists" status="CANDIDATE">
+      <description>City Exists; null and blank value check</description>
+      <LongDescription>City Exists; null and blank value check</LongDescription>
+      <Variables>
+        <Variable dataType="string" name="city"/>
+      </Variables>
+      <expression>City EXISTS AND len(trim(City)) &lt;> 0</expression>
+    </DataRuleDefinition>
+    <DataRuleDefinition folder="All" name="CreditCardMatchesRegex" status="CANDIDATE">
+      <description>CreditCard matches regex format; applied to string Credit Card numbers</description>
+      <LongDescription>CreditCard matches regex format; applied to string Credit Card numbers</LongDescription>
+      <Variables>
+        <Variable dataType="string" name="creditcard"/>
+      </Variables>
+      <ExecutableRules>
+        <ExecutableRule folder="All" name="validCrediCardNumber" excludeDuplicates="false">
+          <BoundExpression>BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;ACCOUNT_HOLDERS&quot;.CCN MATCHES_REGEX  '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|6(?:22|4[4-9])[0-9]{13}|65[0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$'</BoundExpression>
+          <OutputDefinition type="FailingRecords">
+            <OutputColumn name="CCN" type="column" value="BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.ACCOUNT_HOLDERS.CCN"/>
+          </OutputDefinition>
+          <Bindings>
+            <Binding var="creditcard">
+              <Column name="BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.ACCOUNT_HOLDERS.CCN"/>
+            </Binding>
+          </Bindings>
+        </ExecutableRule>
+      </ExecutableRules>
+      <expression>CreditCard MATCHES_REGEX '^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|6(?:22|4[4-9])[0-9]{13}|65[0-9]{14}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\\d{3})\\d{11})$'</expression>
+    </DataRuleDefinition>
+    <DataRuleDefinition folder="All" name="EmailAddrValidFormat" status="CANDIDATE">
+      <description>Email Address has valid format</description>
+      <LongDescription>Email Address has valid format</LongDescription>
+      <Variables>
+        <Variable dataType="string" name="email"/>
+      </Variables>
+      <ExecutableRules>
+        <ExecutableRule folder="All" name="validEmailAddress" excludeDuplicates="false">
+          <BoundExpression>IF BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;BANK_CUSTOMERS&quot;.EMAIL EXISTS  AND  len(trim(BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;BANK_CUSTOMERS&quot;.EMAIL)) &lt;> 0 THEN BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;BANK_CUSTOMERS&quot;.EMAIL MATCHES_REGEX  '^[_a-zA-Z0-9-!#$%&amp;\'*+/=?^`{|}~]+(\.[_a-zA-Z0-9-!#$%&amp;\'*+/=?^`{|}~]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$'</BoundExpression>
+          <OutputDefinition type="FailingRecords">
+            <OutputColumn name="EMAIL" type="column" value="BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.BANK_CUSTOMERS.EMAIL"/>
+          </OutputDefinition>
+          <Bindings>
+            <Binding var="email">
+              <Column name="BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.BANK_CUSTOMERS.EMAIL"/>
+            </Binding>
+          </Bindings>
+        </ExecutableRule>
+      </ExecutableRules>
+      <expression>IF email EXISTS AND len(trim(email)) &lt;> 0 THEN email MATCHES_REGEX '^[_a-zA-Z0-9-!#$%&amp;\'*+/=?^`{|}~]+(\.[_a-zA-Z0-9-!#$%&amp;\'*+/=?^`{|}~]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)*(\.[a-zA-Z]{2,6})$' </expression>
+    </DataRuleDefinition>
+    <DataRuleDefinition folder="All" name="FieldExists" status="CANDIDATE">
+      <description>Field Exists; null check only</description>
+      <LongDescription>Field Exists; null check only</LongDescription>
+      <Variables>
+        <Variable dataType="any" name="field1"/>
+      </Variables>
+      <ExecutableRules>
+        <ExecutableRule folder="All" name="creditRatingExist" excludeDuplicates="false">
+          <BoundExpression>BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;BANK_CUSTOMERS&quot;.CREDIT_RATING EXISTS </BoundExpression>
+          <OutputDefinition type="FailingRecords">
+            <OutputColumn name="CREDIT_RATING" type="column" value="BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.BANK_CUSTOMERS.CREDIT_RATING"/>
+          </OutputDefinition>
+          <Bindings>
+            <Binding var="field1">
+              <Column name="BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.BANK_CUSTOMERS.CREDIT_RATING"/>
+            </Binding>
+          </Bindings>
+        </ExecutableRule>
+      </ExecutableRules>
+      <expression>Field1 EXISTS</expression>
+    </DataRuleDefinition>
+    <DataRuleDefinition folder="All" name="FirstNameValid" status="CANDIDATE">
+      <description>First Name Valid; validate for ascii and unicode characters, whitespace, hyphens, apostrophes, and diacritical marks</description>
+      <LongDescription>First Name Valid; validate for ascii and unicode characters, whitespace, hyphens, apostrophes, and diacritical marks</LongDescription>
+      <Variables>
+        <Variable dataType="string" name="firstname"/>
+      </Variables>
+      <expression>IF FirstName EXISTS AND len(trim(FirstName)) &lt;> 0 THEN FirstName MATCHES_REGEX '^[A-Za-z\-\p{L}\p{Zs}\p{Lu}\p{Ll}\p{M}\']+'</expression>
+    </DataRuleDefinition>
+    <DataRuleDefinition folder="All" name="GenderCodeDerivedValid" status="CANDIDATE">
+      <description>Gender Code Derived Valid; valid gender codes are: F (female), M (male), ' ' (blank space = unknown)</description>
+      <LongDescription>Gender Code Derived Valid; valid gender codes are: F (female), M (male), ' ' (blank space = unknown)</LongDescription>
+      <Variables>
+        <Variable dataType="string" name="gendercode"/>
+      </Variables>
+      <expression>IF GenderCode EXISTS AND len(trim(GenderCode)) &lt;> 0 THEN ucase(GenderCode) IN_REFERENCE_LIST {'F','M',' '}</expression>
+    </DataRuleDefinition>
+    <DataRuleDefinition folder="All" name="IdentifierUnique" status="CANDIDATE">
+      <description>Identifier is unique </description>
+      <LongDescription>Identifier is unique </LongDescription>
+      <Variables>
+        <Variable dataType="any" name="idvalue"/>
+      </Variables>
+      <expression>idValue UNIQUE</expression>
+    </DataRuleDefinition>
+    <DataRuleDefinition folder="All" name="NameExists" status="CANDIDATE">
+      <description>Name Exists; null and blank value check</description>
+      <LongDescription>Name Exists; null and blank value check</LongDescription>
+      <Variables>
+        <Variable dataType="string" name="name"/>
+      </Variables>
+      <ExecutableRules>
+        <ExecutableRule folder="All" name="ValidNamexist" excludeDuplicates="false">
+          <BoundExpression>BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;BANK_CLIENTS&quot;.NAME EXISTS  AND  len(trim(BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;BANK_CLIENTS&quot;.NAME)) &lt;> 0</BoundExpression>
+          <OutputDefinition type="FailingRecords">
+            <OutputColumn name="NAME" type="column" value="BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.BANK_CLIENTS.NAME"/>
+          </OutputDefinition>
+          <Bindings>
+            <Binding var="name">
+              <Column name="BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.BANK_CLIENTS.NAME"/>
+            </Binding>
+          </Bindings>
+        </ExecutableRule>
+      </ExecutableRules>
+      <expression>Name EXISTS AND len(trim(Name)) &lt;> 0</expression>
+    </DataRuleDefinition>
+    <DataRuleDefinition folder="All" name="QtyInValidRange" status="CANDIDATE">
+      <description>Quantity in valid range; applied to numeric data; remove one condition if range is unbounded</description>
+      <LongDescription>Quantity in valid range; applied to numeric data; remove one condition if range is unbounded</LongDescription>
+      <Variables>
+        <Variable dataType="any" name="qtymaxvalue"/>
+        <Variable dataType="any" name="qtyminvalue"/>
+        <Variable dataType="any" name="qtyvalue"/>
+      </Variables>
+      <ExecutableRules>
+        <ExecutableRule folder="All" name="validAccountBalance" excludeDuplicates="false">
+          <BoundExpression>BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;SAVINGS_ACCOUNTS&quot;.ACCOUNT_BALANCE >=1000.0 AND BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;SAVINGS_ACCOUNTS&quot;.ACCOUNT_BALANCE &lt;=1.0E8</BoundExpression>
+          <OutputDefinition type="FailingRecords">
+            <OutputColumn name="qtyminvalue" type="variable" value="qtyminvalue"/>
+            <OutputColumn name="ACCOUNT_BALANCE" type="column" value="BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.SAVINGS_ACCOUNTS.ACCOUNT_BALANCE"/>
+            <OutputColumn name="qtymaxvalue" type="variable" value="qtymaxvalue"/>
+          </OutputDefinition>
+          <Bindings>
+            <Binding var="qtyminvalue">
+              <Constant dataType="numeric" numericValue="1000.0"/>
+            </Binding>
+            <Binding var="qtyvalue">
+              <Column name="BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.SAVINGS_ACCOUNTS.ACCOUNT_BALANCE"/>
+            </Binding>
+            <Binding var="qtymaxvalue">
+              <Constant dataType="numeric" numericValue="1.0E8"/>
+            </Binding>
+          </Bindings>
+        </ExecutableRule>
+      </ExecutableRules>
+      <expression>qtyValue >= qtyMinValue AND qtyValue &lt;= qtyMaxValue</expression>
+    </DataRuleDefinition>
+    <DataRuleDefinition folder="All" name="ValidUsPhoneFormat" status="CANDIDATE">
+      <description>Valid US Phone format; US Phone Numbers are the 7-11 digit numbering scheme using the US designation</description>
+      <LongDescription>Valid US Phone format; US Phone Numbers are the 7-11 digit numbering scheme using the US designation</LongDescription>
+      <Variables>
+        <Variable dataType="string" name="usphone"/>
+      </Variables>
+      <ExecutableRules>
+        <ExecutableRule folder="All" name="ValidUSPhoneNumber1" excludeDuplicates="false">
+          <BoundExpression>IF BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;BANK_CLIENTS&quot;.PHONE1 EXISTS  AND  len(trim(BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;BANK_CLIENTS&quot;.PHONE1)) &lt;> 0 THEN  len(trim(BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;BANK_CLIENTS&quot;.PHONE1)) >= 7 AND BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;BANK_CLIENTS&quot;.PHONE1 MATCHES_REGEX  '^((1|\+1)?( |-|.)?)?(([2-9]{1}[0-9]{2})?|[2-9]{1}[0-9]{2})( |-|.)?([a-zA-Z0-9]{3}( |-|.)?[a-zA-Z0-9]{4})[ ]*((( |x|X|ext|ext.|extension|Ext|Ext.|Extension|EXT|EXT.|#){1}[ ]?([0-9]){1,7})([*]){0,1}){0,1}$'</BoundExpression>
+          <OutputDefinition type="FailingRecords">
+            <OutputColumn name="PHONE1" type="column" value="BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.BANK_CLIENTS.PHONE1"/>
+          </OutputDefinition>
+          <Bindings>
+            <Binding var="usphone">
+              <Column name="BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.BANK_CLIENTS.PHONE1"/>
+            </Binding>
+          </Bindings>
+        </ExecutableRule>
+        <ExecutableRule folder="All" name="ValidUSPhoneNumber2" excludeDuplicates="false">
+          <BoundExpression>IF BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;BANK_CLIENTS&quot;.PHONE2 EXISTS  AND  len(trim(BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;BANK_CLIENTS&quot;.PHONE2)) &lt;> 0 THEN  len(trim(BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;BANK_CLIENTS&quot;.PHONE2)) >= 7 AND BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.&quot;BANK_CLIENTS&quot;.PHONE2 MATCHES_REGEX  '^((1|\+1)?( |-|.)?)?(([2-9]{1}[0-9]{2})?|[2-9]{1}[0-9]{2})( |-|.)?([a-zA-Z0-9]{3}( |-|.)?[a-zA-Z0-9]{4})[ ]*((( |x|X|ext|ext.|extension|Ext|Ext.|Extension|EXT|EXT.|#){1}[ ]?([0-9]){1,7})([*]){0,1}){0,1}$'</BoundExpression>
+          <OutputDefinition type="FailingRecords">
+            <OutputColumn name="PHONE2" type="column" value="BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.BANK_CLIENTS.PHONE2"/>
+          </OutputDefinition>
+          <Bindings>
+            <Binding var="usphone">
+              <Column name="BANKDEMO_HOST.DATABASE_NAME.DATABASE_SCHEMA.BANK_CLIENTS.PHONE2"/>
+            </Binding>
+          </Bindings>
+        </ExecutableRule>
+      </ExecutableRules>
+      <expression>IF USPhone EXISTS AND len(trim(USPhone)) &lt;> 0 THEN len(trim(USPhone)) >= 7 AND USPhone MATCHES_REGEX '^((1|\+1)?( |-|.)?)?(([2-9]{1}[0-9]{2})?|[2-9]{1}[0-9]{2})( |-|.)?([a-zA-Z0-9]{3}( |-|.)?[a-zA-Z0-9]{4})[ ]*((( |x|X|ext|ext.|extension|Ext|Ext.|Extension|EXT|EXT.|#){1}[ ]?([0-9]){1,7})([*]){0,1}){0,1}$'</expression>
+    </DataRuleDefinition>
+  </DataRuleDefinitions>
+  <Folders>
+    <Folder name="All">
+      <description>Global category for all QualityComponents</description>
+      <LongDescription>Global category for all QualityComponents</LongDescription>
+    </Folder>
+  </Folders>
+</iaapi:Project>

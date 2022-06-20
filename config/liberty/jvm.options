@@ -1,0 +1,3 @@
+-Dnetworkaddress.cache.ttl=60
+-Dnetworkaddress.cache.negative.ttl=60
+-Dlog4j.configurationFile=./log4j2.xml

@@ -1,0 +1,41 @@
+apply plugin: 'war'
+
+description = "REST Interface for Gov Insights Service"
+
+dependencies {
+    implementation project(':ms-e2e-test-suit-storage')
+    implementation project(':ms-e2e-test-suit-common')
+    implementation project(':ms-e2e-test-suit-datarules')
+    implementation project(':ms-e2e-test-suit-domaindata')
+    compileOnly (configurations.commonJars) {
+        exclude group: 'org.slf4j'
+        exclude group: 'org.apache.logging.log4j'
+    }
+    compileOnly configurations.libertyJars
+
+}
+    
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.web
+        }
+    }
+}
+
+eclipse {
+    classpath {
+        defaultOutputDir = file('bin/main')
+        file.whenMerged { cp ->
+            cp.entries.findAll { it instanceof org.gradle.plugins.ide.eclipse.model.SourceFolder && it.path.startsWith('src/test/') }*.output = 'bin/test'
+        }
+    }
+    wtp {
+        component {
+            contextPath = '/ibm/iis/api/insights/v1'
+        }
+        facet.file.whenMerged {
+            facets.find { it.type.name() == 'installed' && it.name == 'jst.web' }.version = '3.0'
+        }
+    }
+}

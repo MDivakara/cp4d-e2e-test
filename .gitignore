@@ -1,0 +1,13 @@
+# Gradle
+/.gradle/
+build/
+/gradle.properties
+
+# Eclipse
+bin/
+.settings/
+.project
+.classpath
+*.log
+.DS_Store
+govinsights/

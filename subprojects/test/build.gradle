@@ -1,0 +1,177 @@
+
+apply plugin: 'maven-publish'
+apply plugin: 'java'
+apply plugin: 'application'
+
+description = 'test'
+
+dependencies {
+
+    implementation project(':ms-e2e-test-suit-storage')
+    implementation project(':ms-e2e-test-suit-common')
+    implementation project(':ms-e2e-test-suit-datarules')
+    implementation project(':ms-e2e-test-suit-domaindata')
+    implementation project(':ms-e2e-test-suit-rest')
+    implementation configurations.commonJars
+    implementation configurations.libertyJars
+
+    testImplementation group: 'junit', name: 'junit', version: project['junit.version']
+    testImplementation group: 'org.powermock', name: 'powermock-module-junit4', version: project['powermock.junit4.version']
+    testImplementation group: 'org.powermock', name: 'powermock-api-mockito2', version: project['powermock.api.mockito2.version']
+    
+}
+
+ext.failedTests = []
+
+tasks.withType(Test) {
+    doFirst {
+        println "dbType=" + dbType
+    }
+    if (System.getProperty("dbType") != null ) {
+       systemProperty "dbType" , dbType
+    }
+    if (System.getenv("INSIGHTS_DB_TYPE") != null ) {
+       environment "INSIGHTS_DB_TYPE", dbType
+    }
+    testLogging {
+        events "passed", "skipped", "failed"
+        showExceptions true
+        showCauses true
+        showStackTraces true
+        exceptionFormat "full"
+        showStandardStreams true
+    }
+    afterTest { TestDescriptor descriptor, TestResult result ->
+        if(result.resultType == org.gradle.api.tasks.testing.TestResult.ResultType.FAILURE){
+            failedTests << ["${descriptor.className}::${descriptor.name}"]
+        }
+    }
+    afterSuite { desc, result ->
+        if (!desc.parent) { // will match the outermost suite
+            def output = "Results: ${result.resultType} (${result.testCount} tests, ${result.successfulTestCount} passed, ${result.failedTestCount} failed, ${result.skippedTestCount} skipped)"
+            def startItem = '|  ', endItem = '  |'
+            def repeatLength = startItem.length() + output.length() + endItem.length()
+            println('\n' + ('-' * repeatLength) + '\n' + startItem + output + endItem + '\n' + ('-' * repeatLength))
+        }
+    }
+}
+
+// print out tracked failed tests when the build has finished
+gradle.buildFinished {
+    if(!failedTests.empty){
+        println "Failed tests for ${project.name}:"
+        failedTests.each { failedTest ->
+            println failedTest
+        }
+        println ""
+    }
+}
+
+tasks.withType(JavaExec) {
+    doFirst {
+       println "dbType=" + dbType
+    }
+    if (System.getProperty("dbType") != null ) {
+       systemProperty "dbType" , dbType
+    }
+    if (System.getenv("INSIGHTS_SERVICE_INSIGHTS_DB_TYPE") != null ) {
+       environment "INSIGHTS_SERVICE_INSIGHTS_DB_TYPE", dbType
+    }
+    if (System.getenv("INSIGHTS_DB_TYPE") != null ) {
+       environment "INSIGHTS_DB_TYPE", dbType
+    }
+}
+
+sourceSets {
+    functionalTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/functional-test/java')
+        }
+        resources.srcDir file('src/functional-test/resources')
+    }
+    integrationTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/integration-test/java')
+        }
+        resources.srcDir file('src/integration-test/resources')
+    }
+    sanityTest {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/sanity-test/java')
+        }
+        resources.srcDir file('src/sanity-test/resources')
+    }
+    testDataSetup {
+        java {
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
+            srcDir file('src/testdata-setup/java')
+        }
+        resources.srcDir file('src/testdata-setup/resources')
+    }
+}
+configurations {
+    functionalTestCompile.extendsFrom testCompile
+    functionalTestRuntime.extendsFrom testRuntime
+    integrationTestCompile.extendsFrom testCompile
+    integrationTestRuntime.extendsFrom testRuntime
+    sanityTestCompile.extendsFrom testCompile
+    sanityTestRuntime.extendsFrom testRuntime
+    testDataSetupCompile.extendsFrom testCompile
+    testDataSetupRuntime.extendsFrom testRuntime
+    functionalTestImplementation.extendsFrom testImplementation
+    integrationTestImplementation.extendsFrom testImplementation
+    sanityTestImplementation.extendsFrom testImplementation
+    testDataSetupImplementation.extendsFrom testImplementation
+}
+
+task integrationTest(type: Test) {
+    description = "Execute Integration Tests"
+    testClassesDirs = sourceSets.integrationTest.output.classesDirs
+    classpath = sourceSets.integrationTest.runtimeClasspath
+}
+
+task functionalTest(type: Test) {
+    description = "Execute Functional Tests"
+    testClassesDirs = sourceSets.functionalTest.output.classesDirs
+    classpath = sourceSets.functionalTest.runtimeClasspath
+}
+
+task sanityTest(type: Test) {
+    description = "Execute Sanity Tests"
+    testClassesDirs = sourceSets.sanityTest.output.classesDirs
+    classpath = sourceSets.sanityTest.runtimeClasspath
+}
+
+task testDataSetup(type: Test) {
+    description = "Execute Tests Data Setup / Cleanup"
+    testClassesDirs = sourceSets.testDataSetup.output.classesDirs
+    classpath = sourceSets.testDataSetup.runtimeClasspath
+}
+
+// run functionalTest after test
+//tasks.functionalTest.dependsOn(tasks.test)
+//tasks.functionalTest.mustRunAfter(tasks.test)
+//tasks.check.dependsOn(tasks.functionalTest)
+
+mainClassName = "com.mit.gov.ms.test.standalone.StandAloneTests"
+
+task genToken(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = "com.mit.gov.ms.test.standalone.TokenGenerator"
+}
+
+run {
+    // gradlew run -Pargs='refdata,domaindata'
+    if (project.hasProperty('args')) {
+        def appArgs = project.getProperty('args').split(',').collect { it.trim() }.join("\",\"")
+        appArgs = '[ \"' + appArgs + '\" ]'
+        args Eval.me(appArgs)
+    }
+}
