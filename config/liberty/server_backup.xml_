@@ -3,8 +3,7 @@
     <!-- Enable features -->
     <featureManager>
         <feature>webProfile-7.0</feature>
-        <feature>mpOpenAPI-1.0</feature>
-        <feature>openapi-3.1</feature>
+        <feature>mpOpenAPI-1.1</feature>
         <feature>localConnector-1.0</feature>
         <feature>cdi-1.2</feature>
         <feature>concurrent-1.0</feature>
@@ -12,27 +11,31 @@
 
     <!-- To access this server from a remote client add a host attribute to 
         the following element, e.g. host="*" -->
-    
     <httpEndpoint host="*" httpPort="9080" id="defaultHttpEndpoint" />
-    
     <httpDispatcher enableWelcomePage="false" />
-    
+    <!-- applicationManager autoExpand="true" / -->
+
     <logging traceSpecification="openjpa.Runtime=debug:org.apache.webbeans=debug" />
 
     <library apiTypeVisibility="spec,ibm-api,api,third-party" filesetRef="config,insights" id="insights">
         <folder dir="${server.config.dir}/config" />
         <folder dir="${server.config.dir}/lib/insights" />
     </library>
-    
     <fileset dir="${server.config.dir}/config" id="config" includes="*" />
     <fileset dir="${server.config.dir}/lib/insights" id="insights" includes="*.jar" />
 
-    <webApplication contextRoot="/" id="ora2gcp-mig-rest"
+    <webApplication contextRoot="/" id="gov-insights-rest"
         location="ora2gcp-mig-rest.war" name="ora2gcp-mig-rest">
         <classloader
             apiTypeVisibility="spec,ibm-api,api,third-party" commonLibraryRef="insights">
         </classloader>
     </webApplication>
+
+    <webAppSecurity useAuthenticationDataForUnprotectedResource="false" />
+    
+    <cdi12 enableImplicitBeanArchives="false"/>
+
+    <applicationMonitor updateTrigger="mbean" />
 
     <apiDiscovery publicURL="/v1/migration/insights/" />
 

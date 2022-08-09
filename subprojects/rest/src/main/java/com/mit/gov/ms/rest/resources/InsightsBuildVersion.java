@@ -20,19 +20,21 @@ import javax.ws.rs.core.Response.Status;
 import com.mit.gov.ms.common.Constants;
 import com.mit.gov.ms.model.SwaggerConstants;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.media.Schema;
+
+//import io.swagger.annotations.Api;
+//import io.swagger.annotations.ApiOperation;
 
 @Path("/build")
-@Api(value = SwaggerConstants.INSIGHTS_BUILD_VERSION, hidden = true)
+//@Api(value = SwaggerConstants.INSIGHTS_BUILD_VERSION, hidden = true)
 @Produces(MediaType.TEXT_PLAIN)
 public class InsightsBuildVersion {
 
     private static final String version = Constants.class.getPackage().getImplementationVersion();
 
     @GET
-    @ApiOperation(value = "Get build version information",
-            notes = "Returns information on Insights build version provided by this service.")
+    @Schema(name = "Get build version information",
+            description = "Returns information on Insights build version provided by this service.")
     public Response getBuildVersionInfo() {
         return Response.status(Status.OK).entity(version)
                 .header("X-Content-Type-Options", "nosniff")

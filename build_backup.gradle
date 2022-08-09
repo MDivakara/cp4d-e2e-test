@@ -5,16 +5,13 @@ buildscript {
         mavenLocal()
         mavenCentral()
         maven {
-		
-			url "https://github.com/WASdev/tool.lars"
 			url "https://artifacts.alfresco.com/nexus/content/repositories/public/"
 		}
     }
     dependencies {
-        classpath group: 'io.openliberty.tools', name: 'liberty-gradle-plugin', version: '3.4.1'
+        classpath group: 'io.openliberty.tools', name: 'liberty-gradle-plugin', version: '3.1.2'
         classpath group: 'org.alfresco', name: 'alfresco-repository', version: '4.0.d'
         //classpath "io.spring.gradle:dependency-management-plugin:1.0.4.RELEASE"
-        //classpath "gradle.plugin.io.openliberty.tools:ci.gradle:3.4.1"
     }
 }
 
@@ -31,9 +28,7 @@ allprojects {
     mavenCentral()
     mavenCentral()
         maven {
-            url "https://github.com/WASdev/tool.lars"
 			url "https://artifacts.alfresco.com/nexus/content/repositories/public/"
-			 url "https://plugins.gradle.org/m2/"
 		}
   }
 
@@ -101,18 +96,11 @@ allprojects {
       commonJars group: 'org.apache.commons', name: 'commons-math3', version: project['commons.math3.version']
       commonJars group: 'org.apache.commons', name: 'commons-csv', version: project['commons.csv.version']
       commonJars group: 'javax.activation', name: 'activation', version: project['activation.version']
-      //sql parser
-      commonJars group: 'com.github.jsqlparser', name: 'jsqlparser', version: '4.4'
       
-	  libertyJars group: 'io.swagger', name: 'swagger-annotations', version: project['swagger.annotations.version']      
-      libertyJars group: 'io.swagger.core.v3', name:'swagger-annotations', version:'2.1.7'
-      libertyJars group: 'io.swagger.core.v3', name:'swagger-core', version:'2.1.7'
-      libertyJars group: 'io.swagger.core.v3', name:'swagger-jaxrs2', version:'2.1.7'
-            
       libertyJars group: 'javax.ws.rs', name: 'javax.ws.rs-api', version: project['javax.ws.rs-api.version']
       libertyJars group: 'javax.servlet', name: 'javax.servlet-api', version: project['javax.servlet.api.version']
       libertyJars group: 'javax.inject', name: 'javax.inject', version: '1'
-      //libertyJars group: 'io.swagger', name: 'swagger-annotations', version: project['swagger.annotations.version']
+      libertyJars group: 'io.swagger', name: 'swagger-annotations', version: project['swagger.annotations.version']
       libertyJars group: 'javax.enterprise.concurrent', name: 'javax.enterprise.concurrent-api', version: project['javax.enterprise.concurrent.version']
       
       loggingJars group: 'org.slf4j', name: 'slf4j-api', version: project['slf4j.version']
@@ -174,8 +162,8 @@ subprojects {
   
   project.jar {
     manifest {
-      attributes('Implementation-Title': 'MIT Migration Service API',
-                 'Implementation-Vendor': 'Mastechinfotrellis',
+      attributes('Implementation-Title': 'IBM Information Server Insights API',
+                 'Implementation-Vendor': 'IBM',
                  'Implementation-Version': build_version)
     }
   }
@@ -263,7 +251,7 @@ apply plugin: 'liberty'
 
 dependencies {
     //libertyRuntime group: 'com.ibm.websphere.appserver.runtime', name: 'wlp-webProfile7', version: project['wlp-webProfile7.version']
-    libertyRuntime group: 'io.openliberty', name: 'openliberty-runtime', version: '22.0.0.7'
+    libertyRuntime group: 'io.openliberty', name: 'openliberty-runtime', version: '19.0.0.12'
 }
 
 ext {
@@ -279,7 +267,7 @@ liberty {
     serverXmlFile = file('config/liberty/server.xml_')
     //libertyRuntimeConfiguration = file('config/liberty/server.xml_')
     bootstrapPropertiesFile = file("config/liberty/bootstrap_db2.properties")
-    jvmOptionsFile = file('config/liberty/jvm.options')
+    // jvmOptionsFile = file('config/liberty/jvm.options')
     serverEnvFile = file('config/liberty/server.env')
   }
 }
@@ -329,14 +317,10 @@ task libertyDirClean(type: Delete, dependsOn: libertyStop) {
 }
 
 
-
-
-
 // Configure common task and configuration of war subprojects
 
 def warProjects() {
-    //subprojects.findAll { subproject -> subproject.plugins.hasPlugin('war') && subproject.name == 'db-migration-rest' }
-    subprojects.findAll { subproject -> subproject.plugins.hasPlugin('war') && subproject.name == 'ora2gcp-mig-rest' }
+    subprojects.findAll { subproject -> subproject.plugins.hasPlugin('war') && subproject.name == 'gov-insights-rest' }
 }
 
 // Docker Configuration
@@ -347,7 +331,7 @@ ext {
   travisTag = System.getenv('TRAVIS_TAG')?.trim() ?: 'latest'
   travisBuildNumber = project.build_version
   // if tag is provided use release repo else staging 
-  dockerRegistry = "docker_registry_url"
+  dockerRegistry = "${travisTag != 'latest' ? 'hyc-ug-releases-docker-local' : 'hyc-ug-staging-docker-local'}.artifactory.swg-devops.com"
   // if tag is not provided and branch is not develop use build_number for docker image tag
   // latest tag to be used only for develop branch
   if (travisTag == 'latest' && branchName != 'develop') {
@@ -431,7 +415,7 @@ gradle.projectsEvaluated {
   // Configure all war projects to copy wars to apps dir of liberty or docker
   configure(warProjects()) {
     // Copy/Deploy wars to liberty/apps dir
-    task deploy(type: Copy, overwrite: false, dependsOn: war, description: "deploy ${project.name}.war") {
+    task deploy(type: Copy, overwrite: true, dependsOn: war, description: "deploy ${project.name}.war") {
       doFirst { println "Copying " + war.archiveName + " to " + rootProject.buildDir.name + "/wlp/usr/servers/${libertyServerName}/apps/${project.name}.war" }
       from (war) {
         rename war.archiveName, "${project.name}.war"

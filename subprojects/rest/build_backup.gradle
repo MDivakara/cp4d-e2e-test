@@ -1,21 +1,17 @@
 apply plugin: 'war'
 
-description = "REST Interface for Migration Insights Service"
+description = "REST Interface for Gov Insights Service"
 
 dependencies {
-
     implementation project(':ms-e2e-test-suit-storage')
     implementation project(':ms-e2e-test-suit-common')
-    //implementation project(':ora2gcp-mig-compliance')
-    //implementation project(':ora2gcp-mig-country-reporting')
-    //implementation project(':ora2gcp-mig-data-ingestion')
-    //implementation project(':ora2gcp-mig-non-compliance')
+    implementation project(':ms-e2e-test-suit-datarules')
+    implementation project(':ms-e2e-test-suit-domaindata')
     compileOnly (configurations.commonJars) {
         exclude group: 'org.slf4j'
         exclude group: 'org.apache.logging.log4j'
     }
     compileOnly configurations.libertyJars
-    
 
 }
     
@@ -36,7 +32,7 @@ eclipse {
     }
     wtp {
         component {
-            contextPath = '/mit/oragcp/api/insights/v1'
+            contextPath = '/ibm/iis/api/insights/v1'
         }
         facet.file.whenMerged {
             facets.find { it.type.name() == 'installed' && it.name == 'jst.web' }.version = '3.0'

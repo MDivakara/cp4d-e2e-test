@@ -9,10 +9,9 @@
 
 package com.mit.gov.ms.model;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 
-@ApiModel(value = "ErrorResponse")
+@Schema(name = "ErrorResponse")
 public class ErrorResponse {
 
     public ErrorResponse(String trace, String message) {
@@ -21,10 +20,10 @@ public class ErrorResponse {
         this.message = message;
     }
 
-    @ApiModelProperty(required = true, value = "trace")
+    @Schema(name = "trace", required = true, description = "trace")
     private String trace;
     
-    @ApiModelProperty(required = true, value = "message")
+    @Schema(name = "message", required = true, description = "message")
     private String message;
 
     public String getTrace() {

@@ -36,7 +36,6 @@ import com.mit.gov.ms.common.task.api.InsightsTaskStatus;
 import com.mit.gov.ms.common.task.api.InsightsTaskType;
 import com.mit.gov.ms.datarules.DataRulesResultCache;
 import com.mit.gov.ms.datarules.DataRulesResultManager;
-import com.mit.gov.ms.domaindata.SimilarColumnsUtils;
 
 public class StandAloneTests {
 

@@ -27,22 +27,22 @@ import com.mit.gov.ms.common.InsightsConfiguration;
 import com.mit.gov.ms.model.SwaggerConstants;
 import com.mit.gov.ms.rest.providers.InsightsDefaultExceptionMapper;
 import com.mit.gov.ms.rest.resources.InsightsBuildVersion;
-import com.mit.gov.ms.rest.resources.VersionResourceV3;
+//import com.mit.gov.ms.rest.resources.VersionResourceV3;
 
-import io.swagger.annotations.Info;
-import io.swagger.annotations.SwaggerDefinition;
-import io.swagger.annotations.Tag;
-
-@SwaggerDefinition(info = @Info(title = "Insights API v3", version = "0.0.3", description = "Provides insights on data quality"), tags = {
-    @Tag(name = SwaggerConstants.INSIGHTS_API_VERSION_V3, description = "APIs for Insights version."),
-    @Tag(name = SwaggerConstants.INSIGHTS_HEALTH_V3, description = "APIs for Insights Service Health Status."),
-    @Tag(name = SwaggerConstants.INSIGHTS_BUILD_VERSION, description = "APIs for Insights Build Number."),
-    @Tag(name = SwaggerConstants.INSIGHTS_SCA, description = "APIs for Similar Columns Analysis."),
-    @Tag(name = SwaggerConstants.INSIGHTS_MODEL, description = "APIs for Model Management."),
-    @Tag(name = SwaggerConstants.INSIGHTS_ANOMALY_DETECTION, description = "APIs for Anomaly Detection."),
-    @Tag(name = SwaggerConstants.INSIGHTS_DRD, description = "APIs for Data Rule Definitions."),
-    @Tag(name = SwaggerConstants.INSIGHTS_TASK, description = "APIs for Task Management.")
-})
+//import io.swagger.annotations.Info;
+//import io.swagger.annotations.SwaggerDefinition;
+//import io.swagger.annotations.Tag;
+//
+//@SwaggerDefinition(info = @Info(title = "Insights API v3", version = "0.0.3", description = "Provides insights on data quality"), tags = {
+//    @Tag(name = SwaggerConstants.INSIGHTS_API_VERSION_V3, description = "APIs for Insights version."),
+//    @Tag(name = SwaggerConstants.INSIGHTS_HEALTH_V3, description = "APIs for Insights Service Health Status."),
+//    @Tag(name = SwaggerConstants.INSIGHTS_BUILD_VERSION, description = "APIs for Insights Build Number."),
+//    @Tag(name = SwaggerConstants.INSIGHTS_SCA, description = "APIs for Similar Columns Analysis."),
+//    @Tag(name = SwaggerConstants.INSIGHTS_MODEL, description = "APIs for Model Management."),
+//    @Tag(name = SwaggerConstants.INSIGHTS_ANOMALY_DETECTION, description = "APIs for Anomaly Detection."),
+//    @Tag(name = SwaggerConstants.INSIGHTS_DRD, description = "APIs for Data Rule Definitions."),
+//    @Tag(name = SwaggerConstants.INSIGHTS_TASK, description = "APIs for Task Management.")
+//})
 @ApplicationPath("/v3/test-suit")
 public class InsightsJAXRSApplication extends Application {
 
@@ -114,7 +114,7 @@ public class InsightsJAXRSApplication extends Application {
     
     public static Set<Class<?>> getResourceClasses() {
         Set<Class<?>> resources = new HashSet<>();
-        resources.add(VersionResourceV3.class);
+        //resources.add(VersionResourceV3.class);
         
         resources.add(InsightsBuildVersion.class);
         

@@ -12,4 +12,4 @@ fileTree(subProjectsDir) {
   include(projectName)
   project(projectName).projectDir = new File(subProjectsDir, it)
 }
-include('helm')
+//include('helm')

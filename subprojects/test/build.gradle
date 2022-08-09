@@ -10,7 +10,6 @@ dependencies {
     implementation project(':ms-e2e-test-suit-storage')
     implementation project(':ms-e2e-test-suit-common')
     implementation project(':ms-e2e-test-suit-datarules')
-    implementation project(':ms-e2e-test-suit-domaindata')
     implementation project(':ms-e2e-test-suit-rest')
     implementation configurations.commonJars
     implementation configurations.libertyJars

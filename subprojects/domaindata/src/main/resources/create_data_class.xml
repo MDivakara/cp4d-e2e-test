@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<DataClasses xmlns="http://www.ibm.com/infosphere/ia/classification/DataclassesDefinition">
-  <DataClass id="data_class_id" name="data_class_name" description="description_val" confidenceThreshold="threshold_val">
-    <ColumnSimilarityClassifier>
-      <ReferenceColumnsMetaData>column_metadata_val</ReferenceColumnsMetaData>
-    </ColumnSimilarityClassifier>
-  </DataClass>
-</DataClasses>
